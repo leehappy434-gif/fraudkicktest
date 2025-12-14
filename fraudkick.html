@@ -262,7 +262,7 @@
                             </select>
                         </div>
 
-                        <!-- 2 行業分類（一定係 select） -->
+                        <!-- 2 行業分類：一定係 SELECT -->
                         <div class="filter-group">
                             <label>行業分類</label>
                             <select id="filterIndustry">
@@ -320,15 +320,16 @@
                             </select>
                         </div>
 
-                        <!-- 5 其他（尋找受害者 / 商家回應 etc） -->
+                        <!-- 5 報料者想 -->
                         <div class="filter-group">
-                            <label>其他</label>
+                            <label>報料者想</label>
                             <select id="filterOther">
                                 <option value="">全部</option>
                                 <option value="搵其他受害者">搵其他受害者</option>
                                 <option value="商家回應">商家回應</option>
                                 <option value="搵專業人士幫忙">搵專業人士幫忙</option>
                                 <option value="尋找其他良心商家">尋找其他良心商家</option>
+                                <option value="其他">其他</option>
                             </select>
                         </div>
                     </div>
@@ -398,7 +399,7 @@
                 <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID"
                    class="btn btn-secondary"
                    target="_blank">
-                   搜尋商戶
+                   睇下有幾伏
                 </a>
             </div>
         </div>
@@ -410,7 +411,6 @@
         </footer>
     </div>
 
-    <!-- 暫時只做 keyword filter，之後可配合下拉 -->
     <script>
         const globalInput = document.getElementById('globalSearchInput');
         const pageRoot   = document.getElementById('pageRoot');
@@ -432,4 +432,5 @@
     </script>
 </body>
 </html>
+
 
