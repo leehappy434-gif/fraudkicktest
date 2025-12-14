@@ -23,12 +23,12 @@
 
     body {
       margin: 0;
-      padding: 20px 12px 32px;
+      padding: 30px 18px 40px;          /* 整體 padding 微調 */
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans HK", "PingFang HK", sans-serif;
       background: radial-gradient(circle at top, #fefce8 0, #f7fafc 40%, #e5edf5 100%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
-      font-size: 15px;
+      font-size: 22.5px;                /* 原本約 15px → x1.5 */
       line-height: 1.6;
     }
 
@@ -39,38 +39,38 @@
 
     /* HEADER */
     header {
-      padding: 8px 0 20px;
+      padding: 12px 0 24px;
     }
 
     .header-row {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 24px;
     }
 
     .header-top-line {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
     .header-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .header-logo-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 18px;
       background: conic-gradient(from 180deg, #fb7185, #f97316, #22c55e, #22d3ee);
-      box-shadow: 0 8px 18px rgba(248, 113, 113, 0.45);
+      box-shadow: 0 10px 20px rgba(248, 113, 113, 0.45);
     }
 
     .header-logo-text {
-      font-size: 1.4em;
+      font-size: 2.1em;                 /* x1.5 */
       color: #fb7185;
       font-weight: 800;
       white-space: nowrap;
@@ -80,25 +80,25 @@
     .header-top-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 14px;
       flex-wrap: wrap;
       justify-content: flex-end;
-      font-size: 0.86em;
+      font-size: 1.4em;                 /* 「圖片中文字」≈ 2.5 倍 */
     }
 
     .btn-top {
-      padding: 6px 14px;
+      padding: 8px 26px;
       border-radius: 999px;
       border: 1px solid rgba(248, 113, 113, 0.4);
       background-color: #ffffff;
       color: #b91c1c;
-      font-size: 0.86em;
+      font-size: 1em;
       cursor: pointer;
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.25);
+      gap: 6px;
+      box-shadow: 0 6px 12px rgba(148, 163, 184, 0.25);
     }
 
     .btn-top:hover {
@@ -108,12 +108,12 @@
     .shortcut-bar {
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      margin-left: 4px;
+      gap: 4px;
+      margin-left: 6px;
     }
 
     .shortcut-link {
-      font-size: 0.78em;
+      font-size: 0.9em;                 /* 連同上層 1.4em → 約 2.5x 全站 */
       color: #6b7280;
       cursor: pointer;
     }
@@ -127,16 +127,16 @@
     }
 
     h1 {
-      font-size: clamp(26px, 5vw, 30px);
+      font-size: clamp(39px, 7.5vw, 45px); /* 原 26–30 → x1.5 */
       color: #fb7185;
-      margin: 0 0 4px;
+      margin: 0 0 8px;
       letter-spacing: 0.02em;
     }
 
     .subtitle {
-      font-size: 0.98em;
+      font-size: 1.47em;                /* 0.98em × 1.5 */
       color: var(--text-soft);
-      margin: 4px 0;
+      margin: 6px 0;
     }
 
     .subtitle.emo {
@@ -145,16 +145,16 @@
     }
 
     .buttons {
-      margin: 16px 0 4px;
+      margin: 22px 0 8px;
     }
 
     .btn {
       display: inline-block;
-      padding: 10px 24px;
-      margin: 8px 10px 0 0;
+      padding: 15px 36px;
+      margin: 10px 12px 0 0;
       border: none;
       border-radius: 999px;
-      font-size: 0.96em;
+      font-size: 1.44em;                /* 0.96 × 1.5 */
       cursor: pointer;
       text-decoration: none;
       transition: transform 0.06s ease, box-shadow 0.06s ease;
@@ -163,19 +163,19 @@
     .btn-primary {
       background: linear-gradient(135deg, #fb7185, #f97316);
       color: white;
-      box-shadow: 0 10px 24px rgba(248, 113, 113, 0.45);
+      box-shadow: 0 14px 32px rgba(248, 113, 113, 0.45);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(248, 113, 113, 0.55);
+      box-shadow: 0 18px 38px rgba(248, 113, 113, 0.55);
     }
 
     .btn-secondary {
       background-color: #ffffff;
       color: #fb7185;
       border: 1px solid rgba(248, 113, 113, 0.5);
-      box-shadow: 0 6px 14px rgba(148, 163, 184, 0.35);
+      box-shadow: 0 8px 18px rgba(148, 163, 184, 0.35);
     }
 
     .btn-secondary:hover {
@@ -185,24 +185,25 @@
 
     /* 搜尋 + 分類卡 */
     .search-card {
-      margin-top: 10px;
+      margin-top: 14px;
       background: rgba(255, 255, 255, 0.96);
       border-radius: var(--radius-lg);
-      padding: 16px 18px 18px;
+      padding: 22px 22px 22px;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
+      font-size: 1em;
     }
 
     .search-tagline {
-      font-size: 0.87em;
+      font-size: 1.3em;                 /* 原 0.87 → x1.5 */
       color: #fb7185;
       background: #fff1f2;
       border-radius: 999px;
-      padding: 4px 12px;
+      padding: 6px 16px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 10px;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
     .global-search-box {
@@ -213,17 +214,17 @@
     .global-search {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
+      gap: 8px;
+      padding: 10px 16px;
       border-radius: 999px;
       border: 1px solid #cbd5e1;
       background-color: #f9fafb;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       max-width: 100%;
     }
 
     .global-search span {
-      font-size: 18px;
+      font-size: 27px;
     }
 
     .global-search input {
@@ -231,28 +232,28 @@
       outline: none;
       background: transparent;
       color: #0f172a;
-      font-size: 0.9em;
-      width: min(260px, 60vw);
+      font-size: 1.35em;                /* 0.9 × 1.5 */
+      width: min(360px, 60vw);
     }
 
     .search-hint {
-      font-size: 0.8em;
+      font-size: 1.2em;                 /* 0.8 × 1.5 */
       color: #6b7280;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
     .filter-row {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
+      gap: 14px;
       margin: 0;
     }
 
     .filter-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      font-size: 0.9em;
+      gap: 6px;
+      font-size: 1.35em;                /* 0.9 × 1.5 */
       text-align: left;
     }
 
@@ -262,119 +263,123 @@
     }
 
     .filter-group select {
-      padding: 7px 10px;
+      padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid #cbd5e1;
       background-color: #ffffff;
       color: #111827;
-      font-size: 0.9em;
-      height: 40px;
+      font-size: 0.95em;
+      height: 52px;
     }
 
     /* 功能卡片區 */
     h2.section-title {
       color: #fb7185;
       text-align: center;
-      margin: 32px 0 16px;
-      font-size: 1.3em;
+      margin: 40px 0 20px;
+      font-size: 1.95em;                /* 1.3 × 1.5 */
     }
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 0 0 28px;
+      gap: 20px;
+      margin: 0 0 34px;
+      font-size: 1em;
     }
 
     .feature {
-      padding: 14px 14px 12px;
+      padding: 18px 18px 16px;
       background-color: rgba(255, 255, 255, 0.96);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
-      font-size: 0.94em;
+      font-size: 1.41em;                /* 0.94 × 1.5 */
       color: var(--text-soft);
     }
 
     .feature h3 {
       color: #fb7185;
-      margin: 0 0 6px;
-      font-size: 1em;
+      margin: 0 0 8px;
+      font-size: 1.5em;
     }
 
     /* 排行榜 */
     .ranking {
-      margin: 0 0 30px;
+      margin: 0 0 36px;
     }
 
     .ranking-columns {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      gap: 20px;
+      font-size: 1em;
     }
 
     .ranking-col {
       background-color: rgba(255, 255, 255, 0.98);
       border-radius: var(--radius-lg);
-      padding: 12px 12px 10px;
+      padding: 16px 16px 12px;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
-      font-size: 0.9em;
+      font-size: 1.35em;                /* 0.9 × 1.5 */
     }
 
     .ranking-col-title {
-      font-size: 0.95em;
+      font-size: 1.42em;                /* 0.95 × 1.5 */
       font-weight: 700;
       color: #f97316;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       text-align: center;
     }
 
     .ranking-item {
-      padding: 10px 9px;
+      padding: 12px 11px;
       background-color: #f9fafb;
       border-left: 4px solid #fb7185;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       border-radius: 10px;
     }
 
     .ranking-item h3 {
-      margin: 0 0 4px 0;
+      margin: 0 0 6px 0;
       color: #fb7185;
-      font-size: 0.95em;
+      font-size: 1.42em;                /* 0.95 × 1.5 */
     }
 
     .ranking-item p {
-      margin: 3px 0;
+      margin: 4px 0;
       color: #4b5563;
-      font-size: 0.85em;
+      font-size: 1.28em;                /* 0.85 × 1.5 */
     }
 
     /* Help 區卡片 */
     #helpSection p {
       color: #4b5563;
+      font-size: 1.2em;
     }
 
     .help-card {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 18px;
       background: rgba(255, 255, 255, 0.98);
       border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      margin-bottom: 10px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
       border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
+      font-size: 1em;
     }
 
     .help-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 32px;
       color: #ffffff;
     }
 
@@ -399,55 +404,56 @@
     }
 
     .help-body h3 {
-      margin: 0 0 4px;
+      margin: 0 0 6px;
       color: #111827;
-      font-size: 0.98em;
+      font-size: 1.47em;                /* 0.98 × 1.5 */
     }
 
     .help-body p {
       margin: 4px 0 6px;
-      font-size: 0.88em;
+      font-size: 1.32em;                /* 0.88 × 1.5 */
       color: #4b5563;
     }
 
     .help-meta {
-      font-size: 0.8em;
+      font-size: 1.2em;                 /* 0.8 × 1.5 */
       color: #6b7280;
     }
 
     /* CTA */
     .final-cta {
       text-align: center;
-      padding: 26px 18px 24px;
+      padding: 32px 22px 28px;
       background-color: rgba(255, 255, 255, 0.98);
-      border-radius: 22px;
-      margin: 32px 0 24px;
+      border-radius: 24px;
+      margin: 38px 0 28px;
       border: 1px solid var(--border-soft);
-      box-shadow: 0 18px 40px rgba(148, 163, 184, 0.5);
+      box-shadow: 0 24px 50px rgba(148, 163, 184, 0.5);
+      font-size: 1em;
     }
 
     .final-cta h2 {
       color: #fb7185;
-      margin: 0 0 8px;
-      font-size: 1.3em;
+      margin: 0 0 10px;
+      font-size: 1.95em;
     }
 
     .final-cta p {
-      font-size: 1em;
-      margin-bottom: 16px;
+      font-size: 1.5em;
+      margin-bottom: 18px;
       color: #374151;
     }
 
     footer {
       text-align: center;
-      padding: 18px 8px 4px;
-      margin-top: 8px;
+      padding: 20px 10px 6px;
+      margin-top: 10px;
       color: #6b7280;
-      font-size: 0.8em;
+      font-size: 1.2em;                 /* 0.8 × 1.5 */
     }
 
     footer p {
-      margin: 3px 0;
+      margin: 4px 0;
     }
 
     /* RWD */
@@ -462,7 +468,7 @@
 
     @media (max-width: 768px) {
       body {
-        padding-inline: 10px;
+        padding-inline: 12px;
       }
       .header-top-line {
         flex-direction: column;
@@ -473,7 +479,7 @@
         justify-content: flex-start;
       }
       h1 {
-        font-size: 1.8em;
+        font-size: 2.4em;
       }
       .features {
         grid-template-columns: 1fr;
@@ -485,7 +491,7 @@
       }
       .btn {
         width: 100%;
-        max-width: 260px;
+        max-width: 320px;
         text-align: center;
       }
       .filter-row {
@@ -509,7 +515,7 @@
           <div class="header-top-bar">
             <button type="button" class="btn-top" id="scrollHelpBtn">尋求幫助</button>
             <button type="button" class="btn-top" id="contactBtn">聯絡我們</button>
-            <button type="button" class="btn-top" id="contactBtn">FAQ</button>
+            <button type="button" class="btn-top" id="faqBtn">FAQ</button>
             <button type="button" class="btn-top" id="loginBtn">登入/註冊</button>
 
             <div class="shortcut-bar">
@@ -521,7 +527,6 @@
 
         <!-- 主標題 -->
         <div class="header-main">
-        
           <h1>⚡ 伏KICK 用社群力量,踢走伏店 ⚡</h1>
           <p class="subtitle">香港首個伏店資料庫</p>
           <p class="subtitle" style="font-size: 1em;">認清不良商家產品,拯救大家每分血汗錢</p>
@@ -765,7 +770,7 @@
     <!-- 遇到伏店，仲可以搵邊個？ -->
     <section id="helpSection" style="margin: 10px 0 28px 0;">
       <h2 class="section-title">遇到伏店，仲可以搵邊個？</h2>
-      <p style="text-align:center; font-size:0.9em; color:#4b5563; margin:0 0 16px 0;">
+      <p style="text-align:center; font-size:1.2em; color:#4b5563; margin:0 0 16px 0;">
         先同商戶直接投訴，收好單據、對話紀錄；如果解決唔到，可以按情況搵以下機構幫手。
       </p>
 
@@ -924,7 +929,6 @@
     </footer>
   </div>
 
-  <!-- 原有 JS 功能照保留 -->
   <script>
     const globalInput = document.getElementById('globalSearchInput');
     const pageRoot   = document.getElementById('pageRoot');
@@ -932,6 +936,7 @@
     const helpSection = document.getElementById('helpSection');
     const loginBtn = document.getElementById('loginBtn');
     const contactBtn = document.getElementById('contactBtn');
+    const faqBtn = document.getElementById('faqBtn');
     const badTraderList = document.getElementById('badTraderList');
     const namedShops = document.getElementById('namedShops');
 
@@ -962,6 +967,10 @@
 
     contactBtn.addEventListener('click', () => {
       window.location.href = 'mailto:fraudkick.hk@gmail.com';
+    });
+
+    faqBtn.addEventListener('click', () => {
+      window.location.href = 'javascript:;';
     });
 
     badTraderList.addEventListener('click', () => {
