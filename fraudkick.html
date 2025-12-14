@@ -69,8 +69,9 @@ header {
   box-shadow: 0 8px 18px rgba(248, 113, 113, 0.45);
 }
 
+/* 放大 LOGO 文字 0.5 倍：1.4em → 2.1em */
 .header-logo-text {
-  font-size: 1.4em;
+  font-size: 2.1em;
   color: #fb7185;
   font-weight: 800;
   white-space: nowrap;
@@ -122,21 +123,31 @@ header {
   text-decoration: underline;
 }
 
+/* 主視覺：標題 + 最新報料卡片左右排列 */
+.header-main-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* 左邊主標題 */
 .header-main {
   text-align: center;
 }
 
-h1 {
-  font-size: clamp(26px, 5vw, 30px);
+/* 放大主標題 0.5 倍，大約從 26–30px → 39–45px */
+.hero-title {
+  font-size: clamp(39px, 7.5vw, 45px);
   color: #fb7185;
   margin: 0 0 4px;
   letter-spacing: 0.02em;
 }
 
 .subtitle {
-  font-size: 0.98em;
+  font-size: 1.47em; /* 原來 0.98em ×1.5 */
   color: var(--text-soft);
-  margin: 4px 0;
+  margin: 6px 0;
 }
 
 .subtitle.emo {
@@ -145,7 +156,7 @@ h1 {
 }
 
 .buttons {
-  margin: 16px 0 4px;
+  margin: 18px 0 4px;
 }
 
 .btn {
@@ -181,6 +192,78 @@ h1 {
 .btn-secondary:hover {
   transform: translateY(-1px);
   background-color: #fff7f7;
+}
+
+/* 右邊：最新報料卡片 */
+.latest-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  padding: 14px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  max-height: 230px;
+}
+
+.latest-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.latest-card-title {
+  font-size: 1em;
+  font-weight: 700;
+  color: #fb7185;
+}
+
+.latest-card-meta {
+  font-size: 0.78em;
+  color: #9ca3af;
+}
+
+.latest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 自訂滾動條（可刪） */
+.latest-list::-webkit-scrollbar {
+  width: 6px;
+}
+.latest-list::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 999px;
+}
+.latest-list::-webkit-scrollbar-thumb {
+  background: #fb7185;
+  border-radius: 999px;
+}
+
+.latest-item {
+  padding: 8px 6px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.86em;
+}
+
+.latest-item:last-child {
+  border-bottom: none;
+}
+
+.latest-item-title {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.latest-item-meta {
+  font-size: 0.78em;
+  color: #6b7280;
 }
 
 /* 搜尋 + 分類卡 */
@@ -565,8 +648,8 @@ footer p {
     width: 100%;
     justify-content: flex-start;
   }
-  h1 {
-    font-size: 1.8em;
+  .header-main-row {
+    grid-template-columns: 1fr;
   }
   .features {
     grid-template-columns: 1fr;
@@ -615,19 +698,53 @@ footer p {
       </div>
     </div>
 
-    <!-- 主標題 -->
-    <div class="header-main">
-      <h1>⚡ 伏KICK 用社群力量,踢走伏店 ⚡</h1>
-      <p class="subtitle">香港首個伏店資料庫</p>
-      <p class="subtitle" style="font-size: 1em;">認清不良商家產品,拯救大家每分血汗錢</p>
-      <div class="buttons">
-        <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
-           class="btn btn-primary"
-           target="_blank"
-           rel="noopener noreferrer">
-          📝 伏已中! 😭含淚報料
-        </a>
+    <!-- 主標題 + 最新報料卡片 -->
+    <div class="header-main-row">
+      <!-- 左邊：主標題 -->
+      <div class="header-main">
+        <h1 class="hero-title">⚡ 伏KICK 用社群力量,踢走伏店 ⚡</h1>
+        <p class="subtitle">香港首個伏店資料庫</p>
+        <p class="subtitle" style="font-size: 1.5em;">認清不良商家產品,拯救大家每分血汗錢</p>
+        <div class="buttons">
+          <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
+             class="btn btn-primary"
+             target="_blank"
+             rel="noopener noreferrer">
+            📝 伏已中! 😭含淚報料
+          </a>
+        </div>
       </div>
+
+      <!-- 右邊：最新報料 卡片（綠色框區）-->
+      <aside class="latest-card" aria-label="最新報料">
+        <div class="latest-card-header">
+          <div class="latest-card-title">🔥 最新報料</div>
+          <div class="latest-card-meta">即時更新 · 滾動查看</div>
+        </div>
+        <ul class="latest-list" id="latestReportsList">
+          <!-- 示意假資料，之後可由後端 / Google Sheet 生成 -->
+          <li class="latest-item">
+            <div class="latest-item-title">ABC 美容中心 · hard sell 再收隱藏費</div>
+            <div class="latest-item-meta">地區：銅鑼灣 · 類別：美容 / 健康 · 10 分鐘前</div>
+          </li>
+          <li class="latest-item">
+            <div class="latest-item-title">123 餐廳 生日餐被呃秤</div>
+            <div class="latest-item-meta">地區：尖沙咀 · 類別：餐飲 · 30 分鐘前</div>
+          </li>
+          <li class="latest-item">
+            <div class="latest-item-title">XYZ 網店 貨不對辦兼拖延退款</div>
+            <div class="latest-item-meta">類別：網購 / 物販 · 1 小時前</div>
+          </li>
+          <li class="latest-item">
+            <div class="latest-item-title">某牌子家用美容儀 功能失靈</div>
+            <div class="latest-item-meta">類別：伏物 / 產品 · 2 小時前</div>
+          </li>
+          <li class="latest-item">
+            <div class="latest-item-title">LLL 健身中心 自動續約無通知</div>
+            <div class="latest-item-meta">地區：旺角 · 類別：健身 · 昨日</div>
+          </li>
+        </ul>
+      </aside>
     </div>
 
     <!-- 搜尋 + 分類 卡片 -->
@@ -747,7 +864,6 @@ footer p {
       <article class="fk-card fk-card-consumer">
         <h3 class="fk-card-title">我係消費者</h3>
         <p class="fk-card-subtitle">
-       
         </p>
         <ul class="fk-card-points">
           <li>圍爐、搵其他受害者、認清無良商家。。</li>
@@ -765,7 +881,6 @@ footer p {
       <article class="fk-card fk-card-merchant">
         <h3 class="fk-card-title">我係商戶 / 老闆</h3>
         <p class="fk-card-subtitle">
-         
         </p>
         <ul class="fk-card-points">
           <li>回應投訴，提供證據為自己平反。</li>
@@ -779,12 +894,9 @@ footer p {
     </div>
 
     <p class="fk-split-footnote">
-
     </p>
   </div>
 </section>
-
-</div>
 
 <!-- 排行榜 -->
 <h2 class="section-title">🎯12 月伏感排行榜 Top 5</h2>
@@ -1120,6 +1232,8 @@ if (merchantEntryBtn) {
     alert('之後會開放「商戶專區」，幫老闆回應投訴同平反。');
   });
 }
+
+/* 之後如果要動態載入最新報料，可以在這裡用 fetch 更新 latestReportsList.innerHTML */
 </script>
 </body>
 </html>
