@@ -19,7 +19,7 @@
         }
 
         header {
-            padding: 20px 0 10px;
+            padding: 20px 0 40px; /* 原本 20px 0 10px，加大底部空位 */
             border-bottom: 1px solid #333;
         }
 
@@ -113,7 +113,7 @@
         .search-hint {
             font-size: 0.75em;
             color: #64748b;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
         }
 
         /* 5 個下拉 */
@@ -122,7 +122,7 @@
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
             max-width: 1000px;
-            margin: 0 auto 10px auto;
+            margin: 0 auto 50px auto; /* 原本 10px，向下推多啲空位 */
         }
 
         .filter-group {
@@ -262,7 +262,7 @@
                             </select>
                         </div>
 
-                        <!-- 2 行業分類：一定係 SELECT -->
+                        <!-- 2 行業分類 -->
                         <div class="filter-group">
                             <label>行業分類</label>
                             <select id="filterIndustry">
@@ -432,5 +432,7 @@
     </script>
 </body>
 </html>
+
+
 
 
