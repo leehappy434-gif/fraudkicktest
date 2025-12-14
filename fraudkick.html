@@ -19,7 +19,7 @@
         }
 
         header {
-            padding: 20px 0 40px; /* 原本 20px 0 10px，加大底部空位 */
+            padding: 20px 0 40px;
             border-bottom: 1px solid #333;
         }
 
@@ -122,7 +122,7 @@
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
             max-width: 1000px;
-            margin: 0 auto 50px auto; /* 原本 10px，向下推多啲空位 */
+            margin: 0 auto 50px auto;
         }
 
         .filter-group {
@@ -387,6 +387,161 @@
             </div>
         </div>
 
+        <!-- OpenRice 風格：政府求助清單，一行一個主題 -->
+        <section style="margin: 10px 0 40px 0;">
+            <h2 style="color:#f43f5e; text-align:center; margin-bottom:16px;">
+                遇到伏店，仲可以搵邊個？
+            </h2>
+
+            <!-- 卡片 1：一般消費／黑店 -->
+            <div style="display:flex; align-items:flex-start; gap:14px; background:rgba(15,23,42,0.95); border-radius:10px; padding:14px 16px; margin-bottom:10px; border:1px solid #1f2937;">
+                <div style="width:60px; height:60px; border-radius:8px; background:linear-gradient(135deg,#f97316,#f43f5e); display:flex; align-items:center; justify-content:center; font-size:26px;">
+                    🛒
+                </div>
+                <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                        <h3 style="margin:0; color:#e5e7eb; font-size:1.05em;">
+                            一般消費 / 黑店 / 不良銷售
+                        </h3>
+                        <span style="font-size:0.8em; color:#9ca3af;">美容 · 健身 · 餐飲 · 零售 · 網購</span>
+                    </div>
+                    <p style="margin:6px 0 10px 0; font-size:0.9em; color:#9ca3af;">
+                        貨不對辦、hard sell、亂收費、唔肯退款，可以先搵消委會調解；懷疑虛假或誤導商品說明，可以交海關跟進。[web:187][web:198]
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <a href="https://www.consumer.org.hk/en/complaints-and-services"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-primary" style="min-width:180px;">
+                                消費者委員會投訴
+                            </button>
+                        </a>
+                        <a href="https://www.customs.gov.hk/en/service-enforcement-information/consumer-protection/index.html"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="min-width:190px;">
+                                海關：不良營商手法
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 2：詐騙／投資陷阱 -->
+            <div style="display:flex; align-items:flex-start; gap:14px; background:rgba(15,23,42,0.95); border-radius:10px; padding:14px 16px; margin-bottom:10px; border:1px solid #1f2937;">
+                <div style="width:60px; height:60px; border-radius:8px; background:linear-gradient(135deg,#22c55e,#16a34a); display:flex; align-items:center; justify-content:center; font-size:26px;">
+                    ⚠️
+                </div>
+                <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                        <h3 style="margin:0; color:#e5e7eb; font-size:1.05em;">
+                            懷疑詐騙 / 投資陷阱 / 網上騙案
+                        </h3>
+                        <span style="font-size:0.8em; color:#9ca3af;">網店 · IG / Telegram 群組 · 感情騙案</span>
+                    </div>
+                    <p style="margin:6px 0 10px 0; font-size:0.9em; color:#9ca3af;">
+                        見到「高回報低風險」或要你即刻過數，可以打反詐騙熱線 18222，或者用 Scameter+ 查風險資料。[web:192][web:194][web:197]
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <a href="https://www.adcc.gov.hk/en-hk/contact-us.html"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-primary" style="min-width:180px;">
+                                反詐騙熱線 18222
+                            </button>
+                        </a>
+                        <a href="https://cyberdefender.hk/en-us/scameter/"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="min-width:190px;">
+                                Scameter+ 防騙 App
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 3：銀行／金融 -->
+            <div style="display:flex; align-items:flex-start; gap:14px; background:rgba(15,23,42,0.95); border-radius:10px; padding:14px 16px; margin-bottom:10px; border:1px solid #1f2937;">
+                <div style="width:60px; height:60px; border-radius:8px; background:linear-gradient(135deg,#0ea5e9,#6366f1); display:flex; align-items:center; justify-content:center; font-size:26px;">
+                    💳
+                </div>
+                <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                        <h3 style="margin:0; color:#e5e7eb; font-size:1.05em;">
+                            銀行扣數 / 信用卡 / 理財產品
+                        </h3>
+                        <span style="font-size:0.8em; color:#9ca3af;">信用卡扣錯數 · chargeback 處理唔妥 · 銀行投訴</span>
+                    </div>
+                    <p style="margin:6px 0 10px 0; font-size:0.9em; color:#9ca3af;">
+                        已經向銀行投訴都解決唔到，可以向金管局作第二層投訴，要求銀行正式回應同跟進。[web:200]
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <a href="https://www.hkma.gov.hk/eng/smart-consumers/complaints/complaints-about-banks/"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="min-width:210px;">
+                                金管局：投訴銀行
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 4：電訊 -->
+            <div style="display:flex; align-items:flex-start; gap:14px; background:rgba(15,23,42,0.95); border-radius:10px; padding:14px 16px; margin-bottom:10px; border:1px solid #1f2937;">
+                <div style="width:60px; height:60px; border-radius:8px; background:linear-gradient(135deg,#facc15,#f97316); display:flex; align-items:center; justify-content:center; font-size:26px;">
+                    📶
+                </div>
+                <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                        <h3 style="margin:0; color:#e5e7eb; font-size:1.05em;">
+                            電訊上台 / 寬頻 / 電話合約
+                        </h3>
+                        <span style="font-size:0.8em; color:#9ca3af;">續約伏條款 · 帳單爭拗 · 服務質素差</span>
+                    </div>
+                    <p style="margin:6px 0 10px 0; font-size:0.9em; color:#9ca3af;">
+                        同電訊商傾極都唔妥，可以透過 OFCA 的 CCSS 計劃要求第三方幫你調解合約同收費爭議。[web:205][web:191]
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <a href="https://www.ofca.gov.hk/filemanager/ofca/en/content_793/channel.pdf"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="min-width:230px;">
+                                通訊辦／CCSS 投訴電訊商
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 卡片 5：旅遊／法律資訊 -->
+            <div style="display:flex; align-items:flex-start; gap:14px; background:rgba(15,23,42,0.95); border-radius:10px; padding:14px 16px; border:1px solid #1f2937;">
+                <div style="width:60px; height:60px; border-radius:8px; background:linear-gradient(135deg,#ec4899,#8b5cf6); display:flex; align-items:center; justify-content:center; font-size:26px;">
+                    ✈️
+                </div>
+                <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                        <h3 style="margin:0; color:#e5e7eb; font-size:1.05em;">
+                            旅遊出事 / 想知有冇得告
+                        </h3>
+                        <span style="font-size:0.8em; color:#9ca3af;">旅行團伏你 · 套票貨不對辦 · 想查法律權益</span>
+                    </div>
+                    <p style="margin:6px 0 10px 0; font-size:0.9em; color:#9ca3af;">
+                        旅行社出事，可以向旅遊業監管局投訴；未決定要唔要上庭，可以先睇 CLIC / Family CLIC 嘅法律解說同投訴渠道。[web:191][web:195][web:206]
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <a href="https://familyclic.hk/zh/topics/daily-lives-legal-issues/consumer-rights/channels-for-consumer-complaints/"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="min-width:220px;">
+                                旅遊業監管局及其他渠道
+                            </button>
+                        </a>
+                        <a href="https://www.clic.org.hk/en/topics/consumer_complaints/all"
+                           target="_blank" style="text-decoration:none;">
+                            <button class="btn btn-secondary" style="min-width:210px;">
+                                CLIC：消費法律資訊
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div style="text-align: center; padding: 40px 20px; background-color: rgba(30, 41, 59, 0.8); border-radius: 5px; margin: 40px 0;">
             <h2 style="color: #f43f5e;">你嘅報料可以改變香港</h2>
             <p style="font-size: 1.1em; margin-bottom: 20px;">每一個報料都係真實故事，每一個故事都保護下一個消費者。</p>
@@ -432,6 +587,9 @@
     </script>
 </body>
 </html>
+
+
+
 
 
 
