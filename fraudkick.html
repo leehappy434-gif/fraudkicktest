@@ -16,6 +16,7 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
+            position: relative;
         }
 
         header {
@@ -80,6 +81,59 @@
             background-color: rgba(244, 63, 94, 0.1);
         }
 
+        /* header 右上角按鈕區 */
+        .header-top-bar {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-top {
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid #f97316;
+            background-color: #020617;
+            color: #fed7aa;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .btn-top:hover {
+            background-color: #111827;
+        }
+
+        /* SHORTCUT 區 */
+        .shortcut-bar {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .shortcut-title {
+            font-size: 0.75em;
+            color: #9ca3af;
+        }
+
+        .shortcut-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .shortcut-link {
+            font-size: 0.8em;
+            color: #e5e7eb;
+            cursor: pointer;
+        }
+
+        .shortcut-link:hover {
+            text-decoration: underline;
+        }
+
         /* 搜尋 + 分類區 */
         .global-search-box {
             text-align: center;
@@ -114,27 +168,6 @@
             font-size: 0.75em;
             color: #64748b;
             margin-bottom: 16px;
-        }
-
-        /* header 右上角按鈕區 */
-        .header-top-right {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
-
-        .btn-help {
-            padding: 8px 18px;
-            border-radius: 999px;
-            border: 1px solid #f97316;
-            background-color: #020617;
-            color: #fed7aa;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-
-        .btn-help:hover {
-            background-color: #111827;
         }
 
         /* 5 個下拉 */
@@ -191,23 +224,45 @@
             margin: 40px 0;
         }
 
+        .ranking-columns {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .ranking-col {
+            background-color: rgba(15, 23, 42, 0.96);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #1f2937;
+        }
+
+        .ranking-col-title {
+            font-size: 1em;
+            font-weight: bold;
+            color: #f97316;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
         .ranking-item {
-            padding: 20px;
-            background-color: rgba(30, 41, 59, 0.8);
+            padding: 12px 10px;
+            background-color: rgba(30, 41, 59, 0.9);
             border-left: 4px solid #f43f5e;
-            margin-bottom: 15px;
-            border-radius: 3px;
+            margin-bottom: 10px;
+            border-radius: 4px;
         }
 
         .ranking-item h3 {
-            margin: 0 0 10px 0;
+            margin: 0 0 6px 0;
             color: #f43f5e;
+            font-size: 0.98em;
         }
 
         .ranking-item p {
-            margin: 5px 0;
+            margin: 3px 0;
             color: #cbd5e1;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
 
         footer {
@@ -221,6 +276,9 @@
         @media (max-width: 1024px) {
             .filter-row {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .ranking-columns {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -242,14 +300,30 @@
             .filter-row {
                 grid-template-columns: 1fr;
             }
+            .header-top-bar {
+                position: static;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container" id="pageRoot">
-        <!-- 頁頂右上角「尋求幫助」按鈕 -->
-        <div class="header-top-right">
-            <button type="button" class="btn-help" id="scrollHelpBtn">尋求幫助</button>
+        <!-- 頁頂右上角按鈕列 -->
+        <div class="header-top-bar">
+            <button type="button" class="btn-top" id="scrollHelpBtn">尋求幫助</button>
+            <button type="button" class="btn-top" id="loginBtn">登入</button>
+            <button type="button" class="btn-top" id="contactBtn">聯絡我們</button>
+
+            <!-- SHORT CUT 區 -->
+            <div class="shortcut-bar">
+                <div class="shortcut-title">快速前往消委會</div>
+                <div class="shortcut-links">
+                    <span class="shortcut-link" id="badTraderList">被消委會點名「不良商戶名單」</span>
+                    <span class="shortcut-link" id="namedShops">被點名的商號</span>
+                </div>
+            </div>
         </div>
 
         <header>
@@ -393,25 +467,99 @@
             </div>
         </div>
 
-        <h2 style="color: #f43f5e; text-align: center; margin: 40px 0 20px 0;">12 月伏店排行榜 Top 3</h2>
+        <!-- 新：三個排行榜並列 -->
+        <h2 style="color: #f43f5e; text-align: center; margin: 40px 0 20px 0;">12 月伏排行榜 Top 5</h2>
         <div class="ranking">
-            <div class="ranking-item">
-                <h3>🥇 ABC 美容中心（銅鑼灣）</h3>
-                <p>12 宗申訴 | 🔴 高風險(伏到爆)</p>
-                <p>常見問題：hard sell、隱藏收費</p>
-                <p>代表案例：「自稱唔hard sell，但 sell 到你爆，要加呢樣加果樣」</p>
-            </div>
-            <div class="ranking-item">
-                <h3>🥈 XYZ 網店</h3>
-                <p>8 宗申訴 | 🟡 中風險(伏到嘔)</p>
-                <p>常見問題：延遲交付</p>
-                <p>代表案例：「網購等咗成個月先發貨」</p>
-            </div>
-            <div class="ranking-item">
-                <h3>🥉 123 餐廳（尖沙咀）</h3>
-                <p>7 宗申訴 | 🟡 中風險(伏到嘔)</p>
-                <p>常見問題：呃秤、份量勁少</p>
-                <p>代表案例：「普通大排檔一碟薯仔牛柳粒 $268，但得 5 粒干爭爭牛肉」</p>
+            <div class="ranking-columns">
+                <!-- 實體伏店 -->
+                <div class="ranking-col">
+                    <div class="ranking-col-title">實體伏店 Top 5</div>
+                    <div class="ranking-item">
+                        <h3>🥇 ABC 美容中心（銅鑼灣）</h3>
+                        <p>12 宗申訴 | 🔴 高風險(伏到爆)</p>
+                        <p>常見問題：hard sell、隱藏收費</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>🥈 123 餐廳（尖沙咀）</h3>
+                        <p>9 宗申訴 | 🟡 中風險(伏到嘔)</p>
+                        <p>常見問題：呃秤、份量偏少</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>🥉 LLL 健身中心（旺角）</h3>
+                        <p>7 宗申訴 | 🟡 中風險</p>
+                        <p>常見問題：自動續約、難以取消</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>第4位 MMM 美容院（觀塘）</h3>
+                        <p>6 宗申訴 | 🟡 中風險</p>
+                        <p>常見問題：療程與宣傳不符</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>第5位 NNN 電器舖（深水埗）</h3>
+                        <p>5 宗申訴 | 🟢 低風險</p>
+                        <p>常見問題：保養條款含糊</p>
+                    </div>
+                </div>
+
+                <!-- 網店／網購伏店 -->
+                <div class="ranking-col">
+                    <div class="ranking-col-title">網店 / 網購伏店 Top 5</div>
+                    <div class="ranking-item">
+                        <h3>🥇 XYZ 網店</h3>
+                        <p>10 宗申訴 | 🟡 中風險(伏到嘔)</p>
+                        <p>常見問題：延遲交付、客服失聯</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>🥈 AAA 網店（服飾）</h3>
+                        <p>8 宗申訴 | 🟡 中風險</p>
+                        <p>常見問題：貨不對辦、退貨困難</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>🥉 BBB IG Shop</h3>
+                        <p>6 宗申訴 | 🟡 中風險</p>
+                        <p>常見問題：收款後不發貨</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>第4位 CCC 網店（電器）</h3>
+                        <p>5 宗申訴 | 🟢 低風險</p>
+                        <p>常見問題：保養支援不足</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>第5位 DDD 網店（美容產品）</h3>
+                        <p>4 宗申訴 | 🟢 低風險</p>
+                        <p>常見問題：促銷條款不清晰</p>
+                    </div>
+                </div>
+
+                <!-- 伏物 / 產品 Top 5 -->
+                <div class="ranking-col">
+                    <div class="ranking-col-title">伏物 / 產品 Top 5</div>
+                    <div class="ranking-item">
+                        <h3>🥇 某品牌瘦身療程套票</h3>
+                        <p>15 宗申訴 | 🔴 高風險</p>
+                        <p>問題：效果與宣稱相差甚遠、難以退款</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>🥈 某牌子家用美容儀</h3>
+                        <p>9 宗申訴 | 🟡 中風險</p>
+                        <p>問題：質素不穩、保養跟進欠佳</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>🥉 某旅行團加購購物點套餐</h3>
+                        <p>7 宗申訴 | 🟡 中風險</p>
+                        <p>問題：行程貨不對辦</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>第4位 某品牌月費健身合約</h3>
+                        <p>6 宗申訴 | 🟡 中風險</p>
+                        <p>問題：合約條款苛刻、自動續期</p>
+                    </div>
+                    <div class="ranking-item">
+                        <h3>第5位 某牌子網購神奇清潔劑</h3>
+                        <p>4 宗申訴 | 🟢 低風險</p>
+                        <p>問題：與廣告聲稱不符</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -421,7 +569,7 @@
                 遇到伏店，仲可以搵邊個？
             </h2>
             <p style="text-align:center; font-size:0.9em; color:#cbd5e1; margin:0 0 18px 0;">
-                先同商戶直接投訴，收好單據、對話紀錄；如果解決唔到，可以按情況搵以下機構幫手。[file:2][file:3]
+                先同商戶直接投訴，收好單據、對話紀錄；如果解決唔到，可以按情況搵以下機構幫手。
             </p>
 
             <!-- 卡片 1：投訴基本步驟 -->
@@ -432,7 +580,7 @@
                 <div style="flex:1;">
                     <h3 style="margin:0 0 4px 0; color:#e5e7eb; font-size:1.02em;">第一步：先向商戶正式投訴</h3>
                     <p style="margin:4px 0 6px 0; font-size:0.88em; color:#9ca3af;">
-                        盡量用書面（電郵 / 訊息）講清楚：交易日期、貨品／服務內容、付款金額及方式、訂單編號、投訴原因同你期望嘅解決方案，並保留所有單據、截圖、對話紀錄，之後交政府機構或上庭都會用得著。[file:2]
+                        盡量用書面（電郵 / 訊息）講清楚：交易日期、貨品／服務內容、付款金額及方式、訂單編號、投訴原因同你期望嘅解決方案，並保留所有單據、截圖、對話紀錄，之後交政府機構或上庭都會用得著。
                     </p>
                 </div>
             </div>
@@ -448,13 +596,12 @@
                         <span style="font-size:0.8em; color:#9ca3af;">熱線：2929 2222</span>
                     </div>
                     <p style="margin:6px 0 6px 0; font-size:0.88em; color:#9ca3af;">
-                        消委會以調停人身份處理消費者投訴，協助投訴人及商戶溝通解決糾紛，但並非執法或裁決機構；個案一般須有清晰商戶及交易資料先可跟進。[file:2]
+                        消委會以調停人身份處理消費者投訴，協助投訴人及商戶溝通解決糾紛，但並非執法或裁決機構；個案一般須有清晰商戶及交易資料先可跟進。
                     </p>
                     <p style="margin:0 0 8px 0; font-size:0.86em; color:#9ca3af;">
-                        若涉及重大公眾利益而調停失敗，可考慮申請「消費者訴訟基金」，獲得法律意見及訴訟費用支援，循法律途徑追討損失。[file:3]
+                        若涉及重大公眾利益而調停失敗，可考慮申請「消費者訴訟基金」，獲得法律意見及訴訟費用支援，循法律途徑追討損失。
                     </p>
                     <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <!-- 改成黑底邊框，與「了解消費者訴訟基金」一致 -->
                         <a href="https://www.consumer.org.hk/tc/complaints-and-services"
                            target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="min-width:190px;">
@@ -482,10 +629,9 @@
                         <span style="font-size:0.8em; color:#9ca3af;">查詢：2815 7711　投訴：8100 3553</span>
                     </div>
                     <p style="margin:6px 0 6px 0; font-size:0.88em; color:#9ca3af;">
-                        懷疑貨品重量或尺寸不足、成色不符、虛假或誤導性商品說明，又或者玩具及一般消費品的安全有問題，都可以向香港海關舉報，由執法人員作刑事調查。[file:2]
+                        懷疑貨品重量或尺寸不足、成色不符、虛假或誤導性商品說明，又或者玩具及一般消費品的安全有問題，都可以向香港海關舉報，由執法人員作刑事調查。
                     </p>
                     <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <!-- 直接 redirect 去海關聯絡主頁 -->
                         <a href="https://www.customs.gov.hk/tc/contact-us/"
                            target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
                             <button class="btn btn-secondary" style="min-width:220px;">
@@ -504,122 +650,11 @@
                 <div style="flex:1;">
                     <h3 style="margin:0 0 6px 0; color:#e5e7eb; font-size:1.02em;">行業監管部門（電訊 / 旅遊 / 食肆 / 保險）</h3>
                     <p style="margin:0 0 6px 0; font-size:0.88em; color:#9ca3af;">
-                        電訊及廣播服務合約條款或收費爭議，可向通訊事務管理局／通訊辦投訴；旅行社、導遊及領隊貨不對辦或被迫購物，可向旅遊業監管局申訴；食肆衞生及食物安全可向食環署舉報；個人保險索償及服務爭議，可向保險投訴局尋求免費仲裁或調解協助。[file:2]
+                        電訊及廣播服務合約條款或收費爭議，可向通訊事務管理局／通訊辦投訴；旅行社、導遊及領隊貨不對辦或被迫購物，可向旅遊業監管局申訴；食肆衞生及食物安全可向食環署舉報；個人保險索償及服務爭議，可向保險投訴局尋求免費仲裁或調解協助。
                     </p>
                     <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
                         <a href="https://www.ofca.gov.hk/tc/contact_us/enquiry/index.html"
-                           target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="min-width:210px;">
-                                通訊事務管理局投訴電訊／廣播
-                            </button>
-                        </a>
-                        <a href="https://www.tia.org.hk/tc/compliance/complaints.html"
-                           target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="min-width:210px;">
-                                旅遊業監管局：投訴旅行代理
-                            </button>
-                        </a>
-                        <a href="https://www.fehd.gov.hk/tc_chi/index.html"
-                           target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="min-width:190px;">
-                                食環署：食物及衞生投訴
-                            </button>
-                        </a>
-                        <a href="https://www.icb.org.hk/b5/"
-                           target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="min-width:210px;">
-                                保險投訴局（ICB）
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 卡片 5：上庭／小額錢債／法援 -->
-            <div style="display:flex; align-items:flex-start; gap:14px; background:rgba(15,23,42,0.96); border-radius:10px; padding:14px 16px; border:1px solid #1f2937;">
-                <div style="width:60px; height:60px; border-radius:8px; background:linear-gradient(135deg,#ec4899,#8b5cf6); display:flex; align-items:center; justify-content:center; font-size:26px;">
-                    ⚖️
-                </div>
-                <div style="flex:1;">
-                    <h3 style="margin:0 0 6px 0; color:#e5e7eb; font-size:1.02em;">打算上庭追討：小額錢債、區院、高院</h3>
-                    <p style="margin:0 0 6px 0; font-size:0.88em; color:#9ca3af;">
-                        小額錢債審裁處主要處理 75,000 港元或以下的金錢申索，程序較簡單且不准聘請律師；索償額較高的案件則需分別向區域法院或高等法院入稟，由律師協助處理。[file:2]
-                    </p>
-                    <p style="margin:0 0 6px 0; font-size:0.86em; color:#9ca3af;">
-                        若經濟能力有限，可以考慮向法律援助署或其他資助法律服務申請協助；入稟前亦可先參考 CLIC 等免費法律資訊，了解程序及成本風險。[file:3]
-                    </p>
-                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                        <a href="https://www.judiciary.hk/zh/court_services_facilities/sc.html"
-                           target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="min-width:210px;">
-                                小額錢債審裁處資料
-                            </button>
-                        </a>
-                        <a href="https://www.clic.org.hk/zh/topics/legalAid"
-                           target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
-                            <button class="btn btn-secondary" style="min-width:190px;">
-                                免費或資助法律支援
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div style="text-align: center; padding: 40px 20px; background-color: rgba(30, 41, 59, 0.8); border-radius: 5px; margin: 40px 0;">
-            <h2 style="color: #f43f5e;">你嘅報料可以改變香港</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px;">每一個報料都係真實故事，每一個故事都保護下一個消費者。</p>
-            <div class="buttons">
-                <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
-                   class="btn btn-primary"
-                   target="_blank" rel="noopener noreferrer">
-                    報料申訴
-                </a>
-                <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID"
-                   class="btn btn-secondary"
-                   target="_blank" rel="noopener noreferrer">
-                   睇下有幾伏
-                </a>
-            </div>
-        </div>
-
-        <footer>
-            <p>🛡️ 伏Kick - 香港伏店資料庫</p>
-            <p>隱私優先 | 用戶至上 | 社區驅動</p>
-            <p>遵守香港《個人資料（私隱）條例》</p>
-        </footer>
-    </div>
-
-    <script>
-        const globalInput = document.getElementById('globalSearchInput');
-        const pageRoot   = document.getElementById('pageRoot');
-        const scrollHelpBtn = document.getElementById('scrollHelpBtn');
-        const helpSection = document.getElementById('helpSection');
-
-        function applyGlobalSearch(keyword) {
-            const k = keyword.trim().toLowerCase();
-            const blocks = pageRoot.querySelectorAll(
-                'h2, .feature, .ranking-item, .ranking, .buttons, .subtitle, .feature p, .ranking-item p, section'
-            );
-            blocks.forEach(el => {
-                const text = el.innerText.toLowerCase();
-                el.style.display = (!k || text.includes(k)) ? '' : 'none';
-            });
-        }
-
-        globalInput.addEventListener('input', (e) => {
-            applyGlobalSearch(e.target.value);
-        });
-
-        // 「尋求幫助」按鈕：自動跳到「遇到伏店，仲可以搵邊個？」位置
-        scrollHelpBtn.addEventListener('click', () => {
-            if (helpSection && helpSection.scrollIntoView) {
-                helpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    </script>
-</body>
-</html>
+                           target="_blank" rel="noopener
 
 
 
