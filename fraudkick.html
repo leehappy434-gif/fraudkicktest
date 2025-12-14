@@ -16,19 +16,42 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            position: relative;
         }
 
         header {
-            padding: 20px 0 40px;
+            padding: 10px 0 30px;
             border-bottom: 1px solid #333;
         }
 
         .header-row {
             display: flex;
             flex-direction: column;
+            gap: 16px;
+        }
+
+        /* 頂部：左 LOGO + 右按鈕列（同一行，避免遮擋標題） */
+        .header-top-line {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo-icon {
+            font-size: 1.8em;
+        }
+
+        .header-logo-text {
+            font-size: 1.6em;
+            color: #f43f5e;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         .header-main {
@@ -36,19 +59,19 @@
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.6em;
             color: #f43f5e;
             margin: 0;
         }
 
         .subtitle {
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #cbd5e1;
-            margin: 10px 0;
+            margin: 8px 0;
         }
 
         .buttons {
-            margin: 20px 0;
+            margin: 16px 0;
         }
 
         .btn {
@@ -81,11 +104,8 @@
             background-color: rgba(244, 63, 94, 0.1);
         }
 
-        /* header 右上角按鈕區 */
+        /* header 右上角按鈕列改成水平不覆蓋標題 */
         .header-top-bar {
-            position: absolute;
-            right: 20px;
-            top: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -99,6 +119,7 @@
             color: #fed7aa;
             font-size: 0.9em;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .btn-top:hover {
@@ -107,15 +128,10 @@
 
         /* SHORTCUT 區 */
         .shortcut-bar {
-            margin-top: 8px;
+            margin-left: 8px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-        }
-
-        .shortcut-title {
-            font-size: 0.75em;
-            color: #9ca3af;
+            gap: 2px;
         }
 
         .shortcut-links {
@@ -125,7 +141,7 @@
         }
 
         .shortcut-link {
-            font-size: 0.8em;
+            font-size: 0.78em;
             color: #e5e7eb;
             cursor: pointer;
         }
@@ -176,7 +192,7 @@
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
             max-width: 1000px;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 40px auto;
         }
 
         .filter-group {
@@ -283,8 +299,17 @@
         }
 
         @media (max-width: 768px) {
+            .header-top-line {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-top-bar {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
             h1 {
-                font-size: 2em;
+                font-size: 2.1em;
             }
             .features {
                 grid-template-columns: 1fr;
@@ -300,38 +325,37 @@
             .filter-row {
                 grid-template-columns: 1fr;
             }
-            .header-top-bar {
-                position: static;
-                justify-content: center;
-                margin-bottom: 10px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container" id="pageRoot">
-        <!-- 頁頂右上角按鈕列 -->
-        <div class="header-top-bar">
-            <button type="button" class="btn-top" id="scrollHelpBtn">尋求幫助</button>
-            <button type="button" class="btn-top" id="loginBtn">聯絡我們</button>
-            <button type="button" class="btn-top" id="contactBtn">登入</button>
-
-
-            
-
-            <!-- SHORT CUT 區 -->
-            <div class="shortcut-bar">
-            
-                <div class="shortcut-links">
-                    <span class="shortcut-link" id="badTraderList">被消委會點名「不良商戶名單」</span>
-                    <span class="shortcut-link" id="namedShops">被消委會點名的商號</span>
-                </div>
-            </div>
-        </div>
-
         <header>
             <div class="header-row">
-                <!-- 置中標題 -->
+                <!-- 第一行：LOGO + 按鈕列，避免遮擋大標題 -->
+                <div class="header-top-line">
+                    <div class="header-logo">
+                        <span class="header-logo-icon">⚡</span>
+                        <span class="header-logo-text">伏KICK 用社群力量,踢走伏店</span>
+                    </div>
+
+                    <!-- 右上角按鈕列 -->
+                    <div class="header-top-bar">
+                        <button type="button" class="btn-top" id="scrollHelpBtn">尋求幫助</button>
+                        <button type="button" class="btn-top" id="contactBtn">聯絡我們</button>
+                        <button type="button" class="btn-top" id="loginBtn">登入</button>
+
+                        <!-- SHORT CUT 區 -->
+                        <div class="shortcut-bar">
+                            <div class="shortcut-links">
+                                <span class="shortcut-link" id="badTraderList">被消委會點名「不良商戶名單」</span>
+                                <span class="shortcut-link" id="namedShops">被消委會點名的商號</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 主標題區 -->
                 <div class="header-main">
                     <h1>⚡ 伏KICK 用社群力量,踢走伏店 ⚡</h1>
                     <p class="subtitle">香港首個伏店資料庫</p>
@@ -341,8 +365,7 @@
                            class="btn btn-primary"
                            target="_blank"
                            rel="noopener noreferrer">
-                            📝 伏已中!
-                               含淚報料
+                            📝 伏已中! 含淚報料
                         </a>
                     </div>
                 </div>
@@ -471,7 +494,7 @@
             </div>
         </div>
 
-        <!-- 新：三個排行榜並列 -->
+        <!-- 三個排行榜並列 -->
         <h2 style="color: #f43f5e; text-align: center; margin: 40px 0 20px 0;">12 月伏排行榜 Top 5</h2>
         <div class="ranking">
             <div class="ranking-columns">
@@ -772,12 +795,12 @@
             }
         });
 
-        // 登入：暫時導向 Google Form / placeholder，你之後可以改成真正登入頁
+        // 登入：placeholder，你之後可以改成真正登入頁
         loginBtn.addEventListener('click', () => {
             window.location.href = 'javascript:;';
         });
 
-        // 聯絡我們：暫時使用 mailto，你可改成專用表單頁
+        // 聯絡我們：暫時使用 mailto
         contactBtn.addEventListener('click', () => {
             window.location.href = 'mailto:fraudkick.hk@gmail.com';
         });
@@ -787,13 +810,14 @@
             window.location.href = 'https://www.consumer.org.hk/tc/complaints-and-services/sanctioned-traders';
         });
 
-        // SHORT CUT：被點名的商號（範例：新聞稿／點名頁，可按實際連結替換）
+        // SHORT CUT：被點名的商號
         namedShops.addEventListener('click', () => {
             window.location.href = 'https://www.consumer.org.hk/tc/complaints-and-services/named-firms';
         });
     </script>
 </body>
 </html>
+
 
 
 
