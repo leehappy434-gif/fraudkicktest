@@ -23,16 +23,15 @@
             border-bottom: 1px solid #333;
         }
 
-        /* ======== 上方區：改到置中 ======== */
         .header-row {
             display: flex;
-            flex-direction: column;   /* 直向排 */
-            align-items: center;      /* 整組置中 */
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
         }
 
         .header-main {
-            text-align: center;       /* 文字置中 */
+            text-align: center;
         }
 
         h1 {
@@ -81,9 +80,10 @@
             background-color: rgba(244, 63, 94, 0.1);
         }
 
-        /* 右下：全站搜尋框 */
+        /* 搜尋 + 分類區 */
         .global-search-box {
             text-align: center;
+            width: 100%;
         }
 
         .global-search {
@@ -94,6 +94,7 @@
             border-radius: 999px;
             border: 1px solid #334155;
             background-color: #020617;
+            margin-bottom: 8px;
         }
 
         .global-search span {
@@ -112,7 +113,37 @@
         .search-hint {
             font-size: 0.75em;
             color: #64748b;
-            margin-top: 4px;
+            margin-bottom: 10px;
+        }
+
+        /* 5 個下拉 */
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            max-width: 1000px;
+            margin: 0 auto 10px auto;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 0.8em;
+            text-align: left;
+        }
+
+        .filter-group label {
+            color: #cbd5e1;
+        }
+
+        .filter-group select {
+            padding: 6px 8px;
+            border-radius: 999px;
+            border: 1px solid #475569;
+            background-color: #020617;
+            color: #e2e8f0;
+            font-size: 0.85em;
         }
 
         .features {
@@ -165,6 +196,12 @@
             color: #64748b;
         }
 
+        @media (max-width: 1024px) {
+            .filter-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
@@ -179,6 +216,9 @@
             .btn {
                 width: 90%;
             }
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -186,13 +226,12 @@
     <div class="container" id="pageRoot">
         <header>
             <div class="header-row">
-                <!-- 置中嘅標題區 -->
+                <!-- 置中標題 -->
                 <div class="header-main">
                     <h1>⚡ 伏KICK 用社群力量,踢走伏店 ⚡</h1>
                     <p class="subtitle">香港首個伏店資料庫</p>
                     <p class="subtitle" style="font-size: 1em;">認清不良商家產品,拯救大家每分血汗錢</p>
                     <div class="buttons">
-                        <!-- 直接開 Google Form -->
                         <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
                            class="btn btn-primary"
                            target="_blank">
@@ -201,13 +240,96 @@
                     </div>
                 </div>
 
-                <!-- 跟住喺下面嘅搜尋框 -->
+                <!-- 搜尋 + 分類 -->
                 <div class="global-search-box">
                     <div class="global-search">
                         <span>🔍</span>
                         <input id="globalSearchInput" type="text" placeholder="搜尋頁面內所有文字">
                     </div>
-                    <div class="search-hint">輸入店名 / 行業 / 關鍵字，即時隱藏不相關內容</div>
+                    <div class="search-hint">
+                        搜尋頁面文字＋用下面分類幫你篩選（之後可連接 Google Sheet）
+                    </div>
+
+                    <!-- 5 個下拉：報料類別、行業分類、地區、中伏類別、尋找受害者 -->
+                    <div class="filter-row">
+                        <!-- 1 報料類別 -->
+                        <div class="filter-group">
+                            <label>報料類別 (伏店 / 廢物)</label>
+                            <select id="filterReportType">
+                                <option value="">全部</option>
+                                <option value="伏店">伏店</option>
+                                <option value="廢物">廢物</option>
+                            </select>
+                        </div>
+
+                        <!-- 2 行業分類（跟你表單 screenshot 大致分類） -->
+                        <div class="filter-group">
+                            <label>行業分類</label>
+                            <select id="filterIndustry">
+                                <option value="">全部</option>
+                                <option value="餐飲">餐飲 (餐廳、茶檔、咖啡店等)</option>
+                                <option value="零售">零售 (百貨、便利店、超市、小店等)</option>
+                                <option value="美容 / 健康">美容 / 健康 (美容院、gym、診所等)</option>
+                                <option value="教育 / 培訓">教育 / 培訓 (補習、課程、課後學校等)</option>
+                                <option value="房產 / 旅遊">房產 / 旅遊 (中介、酒店、民宿等)</option>
+                                <option value="交通 / 物流">交通 / 物流 (快遞、Taxi、搬運等)</option>
+                                <option value="維修 / 裝修">維修 / 裝修 (維修、裝修、安裝等)</option>
+                                <option value="金融 / 保險">金融 / 保險 (銀行、保險、投資等)</option>
+                                <option value="電訊 / IT">電訊 / IT (電話、網絡、軟件等)</option>
+                                <option value="網購 / 淘寶">網購 / 物販 (Taobao、網店等)</option>
+                                <option value="網紅 / KOL">網紅 / KOL (直播、廣告、代言等)</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+
+                        <!-- 3 地區：香港 18 區 -->
+                        <div class="filter-group">
+                            <label>地區 (香港 18 區)</label>
+                            <select id="filterDistrict">
+                                <option value="">全部</option>
+                                <option value="中西區">中西區</option>
+                                <option value="東區">東區</option>
+                                <option value="南區">南區</option>
+                                <option value="灣仔">灣仔</option>
+                                <option value="深水埗">深水埗</option>
+                                <option value="九龍城">九龍城</option>
+                                <option value="觀塘">觀塘</option>
+                                <option value="黃大仙">黃大仙</option>
+                                <option value="油尖旺">油尖旺</option>
+                                <option value="離島">離島</option>
+                                <option value="葵青">葵青</option>
+                                <option value="北區">北區</option>
+                                <option value="西貢">西貢</option>
+                                <option value="沙田">沙田</option>
+                                <option value="大埔">大埔</option>
+                                <option value="荃灣">荃灣</option>
+                                <option value="屯門">屯門</option>
+                                <option value="元朗">元朗</option>
+                            </select>
+                        </div>
+
+                        <!-- 4 中伏類別 -->
+                        <div class="filter-group">
+                            <label>中伏類別 (服務 / 產品)</label>
+                            <select id="filterTrapType">
+                                <option value="">全部</option>
+                                <option value="服務">服務</option>
+                                <option value="產品">產品</option>
+                                <option value="服務 + 產品">服務 + 產品</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+
+                        <!-- 5 尋找受害者 -->
+                        <div class="filter-group">
+                            <label>尋找受害者？</label>
+                            <select id="filterFindVictims">
+                                <option value="">全部</option>
+                                <option value="是">是（想搵其他苦主）</option>
+                                <option value="否">否</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -233,80 +355,5 @@
             <div class="feature">
                 <h3>⚡真實個案</h3>
                 <p>消費紀錄,聊天記錄,報案紀錄,增強真實性。</p>
-            </div>
-            <div class="feature">
-                <h3>💚 社區力量</h3>
-                <p>圍爐,搵其他受害者,認清無良商家。</p>
-            </div>
-        </div>
 
-        <h2 style="color: #f43f5e; text-align: center; margin: 40px 0 20px 0;">12 月伏店排行榜 Top 3</h2>
-        <div class="ranking">
-            <div class="ranking-item">
-                <h3>🥇 ABC 美容中心（銅鑼灣）</h3>
-                <p>12 宗申訴 | 🔴 高風險(伏到爆)</p>
-                <p>常見問題：hard sell、隱藏收費</p>
-                <p>代表案例：「自稱唔hard sell,但sell 到你爆,要加呢樣加果樣」</p>
-            </div>
-            <div class="ranking-item">
-                <h3>🥈 XYZ 網店</h3>
-                <p>8 宗申訴 | 🟡 中風險(伏到嘔)</p>
-                <p>常見問題：延遲交付</p>
-                <p>代表案例：「網購等咗成個月先發貨」</p>
-            </div>
-            <div class="ranking-item">
-                <h3>🥉 123 餐廳（尖沙咀）</h3>
-                <p>7 宗申訴 | 🟡 中風險(伏到嘔)</p>
-                <p>常見問題：呃秤、份量勁少</p>
-                <p>代表案例：「普通大排檔一碟薯仔牛柳粒 $268，但得5粒干爭爭牛肉」</p>
-            </div>
-        </div>
-
-        <div style="text-align: center; padding: 40px 20px; background-color: rgba(30, 41, 59, 0.8); border-radius: 5px; margin: 40px 0;">
-            <h2 style="color: #f43f5e;">你嘅報料可以改變香港</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px;">每一個報料都係真實故事，每一個故事都保護下一個消費者。</p>
-            <div class="buttons">
-                <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
-                   class="btn btn-primary"
-                   target="_blank">
-                    報料申訴
-                </a>
-                <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID"
-                   class="btn btn-secondary"
-                   target="_blank">
-                   搜尋商戶
-                </a>
-            </div>
-        </div>
-
-        <footer>
-            <p>🛡️ 伏Kick - 香港伏店資料庫</p>
-            <p>隱私優先 | 用戶至上 | 社區驅動</p>
-            <p>遵守香港《個人資料（私隱）條例》</p>
-        </footer>
-    </div>
-
-    <!-- 全站搜尋：簡單隱藏唔 match 嘅區塊 -->
-    <script>
-        const globalInput = document.getElementById('globalSearchInput');
-        const pageRoot   = document.getElementById('pageRoot');
-
-        function applyGlobalSearch(keyword) {
-            const k = keyword.trim().toLowerCase();
-            const blocks = pageRoot.querySelectorAll(
-                'h2, .feature, .ranking-item, .ranking, .buttons, .subtitle, .feature p, .ranking-item p'
-            );
-
-            blocks.forEach(el => {
-                const text = el.innerText.toLowerCase();
-                el.style.display = (!k || text.includes(k)) ? '' : 'none';
-            });
-        }
-
-        globalInput.addEventListener('input', (e) => {
-            applyGlobalSearch(e.target.value);
-        });
-    </script>
-</body>
-</html>
 
