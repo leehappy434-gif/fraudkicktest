@@ -1,1254 +1,976 @@
 <!DOCTYPE html>
-<html lang="zh-HK">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>伏Kick - 香港首個伏店資料庫</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
       --bg: #f7fafc;
       --bg-card: #ffffff;
-      --primary: #32c3a6;
-      --primary-soft: #e6fffa;
-      --accent: #4a6fff;
-      --text-main: #222222;
-      --text-soft: #4a5568;
-      --danger: #ff6b6b;
+      --primary: #f97373;
+      --primary-soft: #ffe4e6;
+      --accent: #38bdf8;
+      --text-main: #111827;
+      --text-soft: #4b5563;
       --border-soft: #e2e8f0;
-      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
-      --radius-lg: 20px;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --radius-lg: 18px;
       --radius-md: 12px;
-      --radius-sm: 999px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      padding: 20px 12px 32px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans HK", "PingFang HK", sans-serif;
-      background: radial-gradient(circle at top, #fefce8 0, #f7fafc 45%, #edf2f7 100%);
+      background: radial-gradient(circle at top, #fefce8 0, #f7fafc 40%, #e5edf5 100%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* NAVBAR */
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: rgba(247, 250, 252, 0.88);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
-    }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: 0.02em;
-    }
-
-    .logo-badge {
-      width: 32px;
-      height: 32px;
-      border-radius: 14px;
-      background: conic-gradient(from 190deg, #34d399, #22c55e, #06b6d4, #6366f1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-weight: 800;
-      box-shadow: 0 8px 14px rgba(15, 23, 42, 0.25);
-      font-size: 18px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: 14px;
-      color: var(--text-soft);
-    }
-
-    .nav-links a {
-      font-weight: 500;
-    }
-
-    .pill {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: rgba(255, 255, 255, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .btn {
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 14px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #22c55e, #14b8a6);
-      color: #ffffff;
-      box-shadow: 0 10px 22px rgba(34, 197, 94, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 26px rgba(34, 197, 94, 0.45);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text-soft);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.92);
-    }
-
-    /* MAIN */
-
-    main {
-      flex: 1;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 26px 20px 40px;
     }
 
-    /* HERO */
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 28px;
-      align-items: center;
-      margin-bottom: 28px;
+    /* HEADER */
+    header {
+      padding: 8px 0 20px;
     }
 
-    .hero-tagline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(254, 243, 199, 0.8);
-      color: #92400e;
-      font-size: 12px;
-      margin-bottom: 12px;
-      border: 1px dashed rgba(245, 158, 11, 0.35);
-    }
-
-    .hero-title {
-      font-size: clamp(28px, 4vw, 34px);
-      line-height: 1.25;
-      font-weight: 800;
-      margin-bottom: 10px;
-      letter-spacing: 0.01em;
-    }
-
-    .hero-subtitle {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 18px;
-    }
-
-    .hero-actions {
+    .header-row {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .hero-note {
-      font-size: 12px;
-      color: var(--text-soft);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-note span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      background: #eef2ff;
-      color: #4f46e5;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .hero-search {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: stretch;
-      margin-top: 6px;
-    }
-
-    .input {
-      border-radius: 999px;
-      border: 1px solid rgba(203, 213, 225, 0.9);
-      padding: 9px 13px;
-      font-family: inherit;
-      font-size: 13px;
-      flex: 1;
-      min-width: 0;
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    .input:focus {
-      outline: none;
-      border-color: #38b2ac;
-      box-shadow: 0 0 0 1px rgba(56, 178, 172, 0.2);
-      background: #ffffff;
-    }
-
-    .hero-right {
-      position: relative;
-    }
-
-    .hero-card {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: var(--radius-lg);
-      padding: 18px 18px 16px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .hero-card-title {
-      font-size: 14px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .badge-soft {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: #0f766e;
-      border: 1px solid rgba(45, 212, 191, 0.45);
-    }
-
-    .hero-stat-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 10px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .hero-stat {
-      flex: 1;
-      padding: 8px 9px;
-      border-radius: 12px;
-      background: #f8fafc;
-      border: 1px dashed rgba(203, 213, 225, 0.8);
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-size: 13px;
-      color: var(--text-main);
-      margin-bottom: 2px;
-    }
-
-    .hero-progress {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 6px;
-      border-radius: 999px;
-      background: #e2e8f0;
-      overflow: hidden;
-    }
-
-    .progress-inner {
-      width: 68%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #22c55e, #14b8a6, #0ea5e9);
-    }
-
-    .hero-mini {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin-top: 6px;
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .floating-pill {
-      position: absolute;
-      right: -4px;
-      bottom: -8px;
-      background: #0f172a;
-      color: #e2e8f0;
-      font-size: 11px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.7);
-    }
-
-    .floating-pill span {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.35);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
-
-    /* FILTERS */
-
-    .filters {
-      margin-bottom: 18px;
-    }
-
-    .filters-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
-    }
-
-    .filters-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-      font-size: 13px;
-    }
-
-    .filters-title {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-    }
-
-    .filters-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .select {
-      border-radius: 999px;
-      border: 1px solid rgba(203, 213, 225, 0.9);
-      padding: 8px 11px;
-      font-family: inherit;
-      font-size: 12px;
-      background: #ffffff;
-      min-width: 130px;
-      color: var(--text-soft);
-    }
-
-    .select:focus {
-      outline: none;
-      border-color: #38b2ac;
-      box-shadow: 0 0 0 1px rgba(56, 178, 172, 0.2);
-    }
-
-    /* LAYOUT GRID */
-
-    .grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      flex-direction: column;
       gap: 18px;
-      align-items: start;
     }
 
-    /* LEFT: RANKING */
-
-    .section {
-      margin-bottom: 18px;
-    }
-
-    .section-header {
+    .header-top-line {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
+      align-items: center;
+      gap: 16px;
     }
 
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
+    .header-logo {
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    .section-subtitle {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .chips {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-    }
-
-    .chip {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(203, 213, 225, 0.9);
-      background: rgba(248, 250, 252, 0.9);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .chip-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #f97316;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: var(--radius-lg);
-      padding: 12px 12px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
-    }
-
-    .card + .card {
-      margin-top: 8px;
-    }
-
-    .card-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 10px;
-      margin-bottom: 8px;
-      font-size: 12px;
     }
 
-    .card-header-row strong {
-      font-size: 13px;
+    .header-logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 14px;
+      background: conic-gradient(from 180deg, #fb7185, #f97316, #22c55e, #22d3ee);
+      box-shadow: 0 8px 18px rgba(248, 113, 113, 0.45);
     }
 
-    .rank-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 12px;
+    .header-logo-text {
+      font-size: 1.4em;
+      color: #fb7185;
+      font-weight: 800;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
     }
 
-    .rank-item {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 7px 6px;
-      border-radius: 10px;
-    }
-
-    .rank-item:nth-child(odd) {
-      background: #f9fafb;
-    }
-
-    .rank-left {
+    .header-top-bar {
       display: flex;
       align-items: center;
       gap: 8px;
-      min-width: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.86em;
     }
 
-    .rank-number {
-      width: 18px;
-      height: 18px;
+    .btn-top {
+      padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(203, 213, 225, 0.9);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: var(--text-soft);
-      background: #ffffff;
-    }
-
-    .rank-main {
-      min-width: 0;
-    }
-
-    .rank-name {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .rank-meta {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .rank-right {
-      text-align: right;
-      font-size: 11px;
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      background-color: #ffffff;
+      color: #b91c1c;
+      font-size: 0.86em;
+      cursor: pointer;
       white-space: nowrap;
-    }
-
-    .badge-risk {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      border-radius: 999px;
-      padding: 2px 7px;
-      font-size: 10px;
+      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.25);
+    }
+
+    .btn-top:hover {
+      background-color: #fff5f5;
+    }
+
+    .shortcut-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-left: 4px;
+    }
+
+    .shortcut-link {
+      font-size: 0.78em;
+      color: #6b7280;
+      cursor: pointer;
+    }
+
+    .shortcut-link:hover {
+      text-decoration: underline;
+    }
+
+    .header-main {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(26px, 5vw, 30px);
+      color: #fb7185;
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.98em;
+      color: var(--text-soft);
+      margin: 4px 0;
+    }
+
+    .subtitle.emo {
       font-weight: 600;
+      color: #334155;
     }
 
-    .badge-risk-high {
-      background: rgba(248, 113, 113, 0.12);
-      color: #b91c1c;
-      border: 1px solid rgba(248, 113, 113, 0.6);
+    .buttons {
+      margin: 16px 0 4px;
     }
 
-    .badge-risk-mid {
-      background: rgba(251, 191, 36, 0.12);
-      color: #92400e;
-      border: 1px solid rgba(251, 191, 36, 0.6);
-    }
-
-    .badge-risk-low {
-      background: rgba(52, 211, 153, 0.12);
-      color: #047857;
-      border: 1px solid rgba(52, 211, 153, 0.6);
-    }
-
-    .badge-risk-dot {
-      width: 7px;
-      height: 7px;
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      margin: 8px 10px 0 0;
+      border: none;
       border-radius: 999px;
-      background: currentColor;
+      font-size: 0.96em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.06s ease, box-shadow 0.06s ease;
     }
 
-    /* RIGHT: INFO / HELP */
-
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .btn-primary {
+      background: linear-gradient(135deg, #fb7185, #f97316);
+      color: white;
+      box-shadow: 0 10px 24px rgba(248, 113, 113, 0.45);
     }
 
-    .stack-card {
-      background: rgba(255, 255, 255, 0.95);
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(248, 113, 113, 0.55);
+    }
+
+    .btn-secondary {
+      background-color: #ffffff;
+      color: #fb7185;
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      box-shadow: 0 6px 14px rgba(148, 163, 184, 0.35);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      background-color: #fff7f7;
+    }
+
+    /* 搜尋 + 分類卡 */
+    .search-card {
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.96);
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(226, 232, 240, 0.95);
-      padding: 12px 13px;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
-      font-size: 12px;
+      padding: 16px 18px 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
     }
 
-    .stack-card h3 {
-      margin: 0 0 6px;
-      font-size: 13px;
-    }
-
-    .stack-card p {
-      margin: 0 0 8px;
-      color: var(--text-soft);
-    }
-
-    .stack-list {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text-soft);
-    }
-
-    .stack-list li {
-      margin-bottom: 4px;
-    }
-
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .step-item {
-      border-radius: var(--radius-md);
-      background: #f8fafc;
-      padding: 8px 9px;
-      border: 1px dashed rgba(203, 213, 225, 0.9);
-      display: flex;
-      gap: 8px;
-    }
-
-    .step-icon {
-      width: 22px;
-      height: 22px;
+    .search-tagline {
+      font-size: 0.87em;
+      color: #fb7185;
+      background: #fff1f2;
       border-radius: 999px;
-      background: #e0f2fe;
+      padding: 4px 12px;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
-
-    .step-body {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .step-body strong {
-      display: block;
-      color: var(--text-main);
-      margin-bottom: 2px;
-    }
-
-    /* CTA */
-
-    .cta {
-      margin-top: 18px;
-    }
-
-    .cta-card {
-      background: radial-gradient(circle at top left, #bbf7d0 0, #6ee7b7 24%, #e0f2fe 60%, #eff6ff 100%);
-      border-radius: 24px;
-      padding: 16px 16px 14px;
-      position: relative;
-      overflow: hidden;
-      color: #022c22;
-      box-shadow: 0 18px 50px rgba(16, 185, 129, 0.45);
-    }
-
-    .cta-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .cta-main {
-      max-width: 540px;
-    }
-
-    .cta-title {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .cta-text {
-      font-size: 13px;
-      opacity: 0.9;
+      gap: 6px;
       margin-bottom: 10px;
     }
 
-    .cta-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
+    .global-search-box {
+      text-align: center;
+      width: 100%;
     }
 
-    .cta-badge {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(6, 95, 70, 0.25);
-      background: rgba(240, 253, 250, 0.8);
+    .global-search {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background-color: #f9fafb;
+      margin-bottom: 6px;
+      max-width: 100%;
     }
 
-    .cta-ghost {
-      background: rgba(15, 118, 110, 0.2);
-      color: #022c22;
-      border-radius: 999px;
-      padding: 7px 13px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .global-search span {
+      font-size: 18px;
     }
 
-    .btn-cta-main {
-      background: #022c22;
-      color: #f0fdf4;
-      border-radius: 999px;
-      padding: 7px 16px;
+    .global-search input {
       border: none;
-      cursor: pointer;
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.6);
+      outline: none;
+      background: transparent;
+      color: #0f172a;
+      font-size: 0.9em;
+      width: min(260px, 60vw);
     }
 
-    .btn-cta-main:hover {
-      transform: translateY(-1px);
+    .search-hint {
+      font-size: 0.8em;
+      color: #6b7280;
+      margin-bottom: 14px;
     }
 
-    .cta-decor {
-      position: absolute;
-      right: -34px;
-      bottom: -34px;
-      width: 120px;
-      height: 120px;
+    .filter-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.9em;
+      text-align: left;
+    }
+
+    .filter-group label {
+      color: #4b5563;
+      font-weight: 500;
+    }
+
+    .filter-group select {
+      padding: 7px 10px;
       border-radius: 999px;
-      border: 16px solid rgba(22, 163, 74, 0.16);
+      border: 1px solid #cbd5e1;
+      background-color: #ffffff;
+      color: #111827;
+      font-size: 0.9em;
+      height: 40px;
     }
 
-    /* FOOTER */
+    /* 功能卡片區 */
+    h2.section-title {
+      color: #fb7185;
+      text-align: center;
+      margin: 32px 0 16px;
+      font-size: 1.3em;
+    }
 
-    footer {
-      border-top: 1px solid rgba(226, 232, 240, 0.8);
-      background: rgba(248, 250, 252, 0.96);
-      font-size: 11px;
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 0 0 28px;
+    }
+
+    .feature {
+      padding: 14px 14px 12px;
+      background-color: rgba(255, 255, 255, 0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.94em;
       color: var(--text-soft);
     }
 
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 20px 12px;
+    .feature h3 {
+      color: #fb7185;
+      margin: 0 0 6px;
+      font-size: 1em;
+    }
+
+    /* 排行榜 */
+    .ranking {
+      margin: 0 0 30px;
+    }
+
+    .ranking-columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .ranking-col {
+      background-color: rgba(255, 255, 255, 0.98);
+      border-radius: var(--radius-lg);
+      padding: 12px 12px 10px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9em;
+    }
+
+    .ranking-col-title {
+      font-size: 0.95em;
+      font-weight: 700;
+      color: #f97316;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .ranking-item {
+      padding: 10px 9px;
+      background-color: #f9fafb;
+      border-left: 4px solid #fb7185;
+      margin-bottom: 8px;
+      border-radius: 10px;
+    }
+
+    .ranking-item h3 {
+      margin: 0 0 4px 0;
+      color: #fb7185;
+      font-size: 0.95em;
+    }
+
+    .ranking-item p {
+      margin: 3px 0;
+      color: #4b5563;
+      font-size: 0.85em;
+    }
+
+    /* Help 區卡片 */
+    #helpSection p {
+      color: #4b5563;
+    }
+
+    .help-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .help-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 26px;
+      color: #ffffff;
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .help-icon.orange {
+      background: linear-gradient(135deg, #fb923c, #fb7185);
     }
 
-    /* RESPONSIVE */
+    .help-icon.pink {
+      background: linear-gradient(135deg, #fb7185, #ec4899);
+    }
 
-    @media (max-width: 860px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
+    .help-icon.green {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+
+    .help-icon.blue {
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+    }
+
+    .help-icon.purple {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    }
+
+    .help-body h3 {
+      margin: 0 0 4px;
+      color: #111827;
+      font-size: 0.98em;
+    }
+
+    .help-body p {
+      margin: 4px 0 6px;
+      font-size: 0.88em;
+      color: #4b5563;
+    }
+
+    .help-meta {
+      font-size: 0.8em;
+      color: #6b7280;
+    }
+
+    /* CTA */
+    .final-cta {
+      text-align: center;
+      padding: 26px 18px 24px;
+      background-color: rgba(255, 255, 255, 0.98);
+      border-radius: 22px;
+      margin: 32px 0 24px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 40px rgba(148, 163, 184, 0.5);
+    }
+
+    .final-cta h2 {
+      color: #fb7185;
+      margin: 0 0 8px;
+      font-size: 1.3em;
+    }
+
+    .final-cta p {
+      font-size: 1em;
+      margin-bottom: 16px;
+      color: #374151;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 8px 4px;
+      margin-top: 8px;
+      color: #6b7280;
+      font-size: 0.8em;
+    }
+
+    footer p {
+      margin: 3px 0;
+    }
+
+    /* RWD */
+    @media (max-width: 1024px) {
+      .filter-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      .hero-right {
-        order: -1;
-      }
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
+      .ranking-columns {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 640px) {
-      .nav-inner {
-        padding-inline: 14px;
+    @media (max-width: 768px) {
+      body {
+        padding-inline: 10px;
       }
-      .container {
-        padding-inline: 14px;
-      }
-      .filters-card,
-      .hero-card,
-      .stack-card,
-      .card,
-      .cta-card {
-        border-radius: 18px;
-      }
-      .hero-actions {
+      .header-top-line {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
       }
-      .hero-search {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .hero-search .btn-primary {
+      .header-top-bar {
         width: 100%;
+        justify-content: flex-start;
       }
-      .nav-links {
-        display: none;
+      h1 {
+        font-size: 1.8em;
+      }
+      .features {
+        grid-template-columns: 1fr;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn {
+        width: 100%;
+        max-width: 260px;
+        text-align: center;
+      }
+      .filter-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-<div class="page">
+  <div class="container" id="pageRoot">
+    <header>
+      <div class="header-row">
 
-  <!-- NAVBAR -->
-  <header class="nav">
-    <div class="nav-inner">
-      <div class="logo">
-        <div class="logo-badge">伏</div>
-        伏Kick
-      </div>
-      <div class="nav-links">
-        <span class="pill">
-          🔍 一齊用社群力量踢走伏店
-        </span>
-        <a href="#">尋求幫助</a>
-        <a href="#">FAQ</a>
-        <button class="btn btn-outline">登入 / 註冊</button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="container">
-
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-right">
-          <div class="hero-card">
-            <div class="hero-card-header">
-              <div class="hero-card-title">
-                🧊 你唔係一個人
-              </div>
-              <span class="badge-soft">社群實測 · 非官方評分</span>
-            </div>
-            <div class="hero-stat-row">
-              <div class="hero-stat">
-                <strong>香港首個伏店資料庫</strong>
-                <span>用 crowd-sourcing 整合大家嘅伏店經歷，幫你避開高風險店舖。</span>
-              </div>
-              <div class="hero-stat">
-                <strong>唔係鬧交平台</strong>
-                <span>目標係幫大家做足功課保持清醒消費，而唔係鼓勵網上追擊。</span>
-              </div>
-            </div>
-            <div class="hero-progress">
-              <div class="progress-bar">
-                <div class="progress-inner"></div>
-              </div>
-              <span style="font-size: 11px; color: var(--text-soft);">伏感指數 7.2 / 10</span>
-            </div>
-            <div class="hero-mini">
-              <span>👀 讓大家知道「有伏」，先有機會令「伏」減少。</span>
-              <span>🤝 你嘅分享，可能救到下一個人。</span>
-            </div>
+        <!-- LOGO + 上方按鈕 -->
+        <div class="header-top-line">
+          <div class="header-logo">
+            <span class="header-logo-icon"></span>
+            <span class="header-logo-text">伏Kick</span>
           </div>
-          <div class="floating-pill">
-            <span>🧊</span>
-            <span>伏已中？拎住收據，慢慢打字就得。</span>
+
+          <div class="header-top-bar">
+            <button type="button" class="btn-top" id="scrollHelpBtn">尋求幫助</button>
+            <button type="button" class="btn-top" id="contactBtn">聯絡我們</button>
+            <button type="button" class="btn-top" id="contactBtn">FAQ</button>
+            <button type="button" class="btn-top" id="loginBtn">登入/註冊</button>
+
+            <div class="shortcut-bar">
+              <span class="shortcut-link" id="badTraderList">被消委會點名「不良商戶名單」</span>
+              <span class="shortcut-link" id="namedShops">被消委會點名的商號</span>
+            </div>
           </div>
         </div>
 
-        <div>
-          <div class="hero-tagline">
-            ⚡ 用社群力量，踢走伏店
+        <!-- 主標題 -->
+        <div class="header-main">
+          <p class="subtitle emo">你今日伏左未呀？😭</p>
+          <h1>⚡ 伏KICK 用社群力量,踢走伏店 ⚡</h1>
+          <p class="subtitle">香港首個伏店資料庫</p>
+          <p class="subtitle" style="font-size: 1em;">認清不良商家產品,拯救大家每分血汗錢</p>
+          <div class="buttons">
+            <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
+               class="btn btn-primary"
+               target="_blank"
+               rel="noopener noreferrer">
+              📝 伏已中! 含淚報料
+            </a>
           </div>
-          <h1 class="hero-title">
-            香港首個伏店資料庫，<br>畀你出門前有心理準備。
-          </h1>
-          <p class="hero-subtitle">
-            呢度唔係「鬧交谷」，而係一個輕鬆但認真嘅地方，記錄你遇過嘅伏店／伏餐／伏服務，幫其他人避雷。
+        </div>
+
+        <!-- 搜尋 + 分類 卡片 -->
+        <div class="search-card">
+          <div class="search-tagline">
+            😭 你今日伏左未呀？試下搜尋「伏感」睇下有冇人同你一樣中伏。
+          </div>
+          <div class="global-search-box">
+            <div class="global-search">
+              <span>🔍</span>
+              <input id="globalSearchInput" type="text" placeholder="搜尋頁面內所有文字 · 搜尋伏感／店名／地區">
+            </div>
+            <div class="search-hint">
+              搜尋頁面文字＋用下面分類幫你篩選（之後可連接 Google Sheet）
+            </div>
+
+            <div class="filter-row">
+              <!-- 1 報料類別 -->
+              <div class="filter-group">
+                <label>報料類別 (伏店 / 伏物)</label>
+                <select id="filterReportType">
+                  <option value="">全部</option>
+                  <option value="伏店">伏店</option>
+                  <option value="伏物">伏物</option>
+                </select>
+              </div>
+
+              <!-- 2 行業分類 -->
+              <div class="filter-group">
+                <label>行業分類</label>
+                <select id="filterIndustry">
+                  <option value="">全部</option>
+                  <option value="餐飲">餐飲 (餐廳、茶樓、咖啡店等)</option>
+                  <option value="零售">零售 (百貨、便利店、超市、小店等)</option>
+                  <option value="美容 / 健康">美容 / 健康 (美容院、gym、診所等)</option>
+                  <option value="教育 / 培訓">教育 / 培訓 (補習、課程、學校等)</option>
+                  <option value="房產 / 旅遊">房產 / 旅遊 (中介、酒店、民宿等)</option>
+                  <option value="交通 / 物流">交通 / 物流 (快遞、Taxi、搬運等)</option>
+                  <option value="維修 / 裝修">維修 / 裝修 (維修、裝修、安裝等)</option>
+                  <option value="金融 / 保險">金融 / 保險 (銀行、保險、投資等)</option>
+                  <option value="電訊 / IT">電訊 / IT (電話、網絡、軟件等)</option>
+                  <option value="網購 / 物販">網購 / 物販 (Taobao、網店等)</option>
+                  <option value="網紅 / KOL">網紅 / KOL (直播、廣告、代言等)</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+
+              <!-- 3 地區 -->
+              <div class="filter-group">
+                <label>地區 (香港 18 區)</label>
+                <select id="filterDistrict">
+                  <option value="">全部</option>
+                  <option value="中西區">中西區</option>
+                  <option value="東區">東區</option>
+                  <option value="南區">南區</option>
+                  <option value="灣仔">灣仔</option>
+                  <option value="深水埗">深水埗</option>
+                  <option value="九龍城">九龍城</option>
+                  <option value="觀塘">觀塘</option>
+                  <option value="黃大仙">黃大仙</option>
+                  <option value="油尖旺">油尖旺</option>
+                  <option value="離島">離島</option>
+                  <option value="葵青">葵青</option>
+                  <option value="北區">北區</option>
+                  <option value="西貢">西貢</option>
+                  <option value="沙田">沙田</option>
+                  <option value="大埔">大埔</option>
+                  <option value="荃灣">荃灣</option>
+                  <option value="屯門">屯門</option>
+                  <option value="元朗">元朗</option>
+                </select>
+              </div>
+
+              <!-- 4 中伏類別 -->
+              <div class="filter-group">
+                <label>中伏類別 (服務 / 產品)</label>
+                <select id="filterTrapType">
+                  <option value="">全部</option>
+                  <option value="服務">服務</option>
+                  <option value="產品">產品</option>
+                  <option value="服務 + 產品">服務 + 產品</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+
+              <!-- 5 報料者想 -->
+              <div class="filter-group">
+                <label>報料者想</label>
+                <select id="filterOther">
+                  <option value="">全部</option>
+                  <option value="搵其他受害者">搵其他受害者</option>
+                  <option value="商家回應">商家回應</option>
+                  <option value="搵專業人士幫忙">搵專業人士幫忙</option>
+                  <option value="尋找其他良心商家">尋找其他良心商家</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- 伏Kick可以點幫到大家？ -->
+    <h2 class="section-title">伏Kick可以點幫到大家？</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>🔒 完全匿名</h3>
+        <p>你嘅名字、電話、Email 完全保密。報料內容匿名發佈。</p>
+      </div>
+      <div class="feature">
+        <h3>📊 風險評級</h3>
+        <p>🟢 低(伏到喊) / 🟡 中(伏到嘔) / 🔴 高(伏到爆)。一眼睇清商戶信譽。</p>
+      </div>
+      <div class="feature">
+        <h3>📱 簡單易用</h3>
+        <p>5 分鐘完成報料，隨時提交。</p>
+      </div>
+      <div class="feature">
+        <h3>🛡️ 數據安全</h3>
+        <p>遵守香港《個人資料（私隱）條例》。合規審核。</p>
+      </div>
+      <div class="feature">
+        <h3>⚡ 真實個案</h3>
+        <p>消費紀錄、聊天記錄、報案紀錄，增強真實性。</p>
+      </div>
+      <div class="feature">
+        <h3>💚 社區力量</h3>
+        <p>圍爐、搵其他受害者、認清無良商家。</p>
+      </div>
+    </div>
+
+    <!-- 排行榜 -->
+    <h2 class="section-title">12 月伏排行榜 Top 5</h2>
+    <div class="ranking">
+      <div class="ranking-columns">
+        <!-- 實體伏店 -->
+        <div class="ranking-col">
+          <div class="ranking-col-title">實體伏店 Top 5</div>
+          <div class="ranking-item">
+            <h3>🥇 ABC 美容中心（銅鑼灣）</h3>
+            <p>12 宗申訴 | 🔴 高風險(伏到爆)</p>
+            <p>常見問題：hard sell、隱藏收費</p>
+          </div>
+          <div class="ranking-item">
+            <h3>🥈 123 餐廳（尖沙咀）</h3>
+            <p>9 宗申訴 | 🟡 中風險(伏到嘔)</p>
+            <p>常見問題：呃秤、份量偏少</p>
+          </div>
+          <div class="ranking-item">
+            <h3>🥉 LLL 健身中心（旺角）</h3>
+            <p>7 宗申訴 | 🟡 中風險</p>
+            <p>常見問題：自動續約、難以取消</p>
+          </div>
+          <div class="ranking-item">
+            <h3>第4位 MMM 美容院（觀塘）</h3>
+            <p>6 宗申訴 | 🟡 中風險</p>
+            <p>常見問題：療程與宣傳不符</p>
+          </div>
+          <div class="ranking-item">
+            <h3>第5位 NNN 電器舖（深水埗）</h3>
+            <p>5 宗申訴 | 🟢 低風險</p>
+            <p>常見問題：保養條款含糊</p>
+          </div>
+        </div>
+
+        <!-- 網店／網購伏店 -->
+        <div class="ranking-col">
+          <div class="ranking-col-title">網店 / 網購伏店 Top 5</div>
+          <div class="ranking-item">
+            <h3>🥇 XYZ 網店</h3>
+            <p>10 宗申訴 | 🟡 中風險(伏到嘔)</p>
+            <p>常見問題：延遲交付、客服失聯</p>
+          </div>
+          <div class="ranking-item">
+            <h3>🥈 AAA 網店（服飾）</h3>
+            <p>8 宗申訴 | 🟡 中風險</p>
+            <p>常見問題：貨不對辦、退貨困難</p>
+          </div>
+          <div class="ranking-item">
+            <h3>🥉 BBB IG Shop</h3>
+            <p>6 宗申訴 | 🟡 中風險</p>
+            <p>常見問題：收款後不發貨</p>
+          </div>
+          <div class="ranking-item">
+            <h3>第4位 CCC 網店（電器）</h3>
+            <p>5 宗申訴 | 🟢 低風險</p>
+            <p>常見問題：保養支援不足</p>
+          </div>
+          <div class="ranking-item">
+            <h3>第5位 DDD 網店（美容產品）</h3>
+            <p>4 宗申訴 | 🟢 低風險</p>
+            <p>常見問題：促銷條款不清晰</p>
+          </div>
+        </div>
+
+        <!-- 伏物 / 產品 -->
+        <div class="ranking-col">
+          <div class="ranking-col-title">伏物 / 產品 Top 5</div>
+          <div class="ranking-item">
+            <h3>🥇 某品牌瘦身療程套票</h3>
+            <p>15 宗申訴 | 🔴 高風險</p>
+            <p>問題：效果與宣稱相差甚遠、難以退款</p>
+          </div>
+          <div class="ranking-item">
+            <h3>🥈 某牌子家用美容儀</h3>
+            <p>9 宗申訴 | 🟡 中風險</p>
+            <p>問題：質素不穩、保養跟進欠佳</p>
+          </div>
+          <div class="ranking-item">
+            <h3>🥉 某旅行團加購購物點套餐</h3>
+            <p>7 宗申訴 | 🟡 中風險</p>
+            <p>問題：行程貨不對辦</p>
+          </div>
+          <div class="ranking-item">
+            <h3>第4位 某品牌月費健身合約</h3>
+            <p>6 宗申訴 | 🟡 中風險</p>
+            <p>問題：合約條款苛刻、自動續期</p>
+          </div>
+          <div class="ranking-item">
+            <h3>第5位 某牌子網購神奇清潔劑</h3>
+            <p>4 宗申訴 | 🟢 低風險</p>
+            <p>問題：與廣告聲稱不符</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 遇到伏店，仲可以搵邊個？ -->
+    <section id="helpSection" style="margin: 10px 0 28px 0;">
+      <h2 class="section-title">遇到伏店，仲可以搵邊個？</h2>
+      <p style="text-align:center; font-size:0.9em; color:#4b5563; margin:0 0 16px 0;">
+        先同商戶直接投訴，收好單據、對話紀錄；如果解決唔到，可以按情況搵以下機構幫手。
+      </p>
+
+      <!-- 卡片 1 -->
+      <div class="help-card">
+        <div class="help-icon orange">📝</div>
+        <div class="help-body">
+          <h3>第一步：先向商戶正式投訴</h3>
+          <p>
+            盡量用書面（電郵 / 訊息）講清楚：交易日期、貨品／服務內容、付款金額及方式、訂單編號、投訴原因同你期望嘅解決方案，並保留所有單據、截圖、對話紀錄，之後交政府機構或上庭都會用得著。
           </p>
-          <div class="hero-actions">
-            <button class="btn btn-primary">
-              📝 伏已中！含淚報料
-            </button>
-            <button class="btn btn-outline">
-              📚 睇下其他人點中伏先
-            </button>
-          </div>
-          <div class="hero-note">
-            <span>i</span>
-            <span>提交前請盡量提供客觀資料（收據、價錢、日期），避免人身攻擊，同大家一齊做到「有骨氣嘅伏」。</span>
-          </div>
-          <div class="hero-search">
-            <input class="input" placeholder="🔍 請輸入店名 / 商場 / 區域，例如：尖沙咀、洗牙、Facial…">
-            <button class="btn btn-primary">搜尋伏感</button>
-          </div>
         </div>
-      </section>
-
-      <!-- FILTERS -->
-      <section class="filters">
-        <div class="filters-card">
-          <div class="filters-header">
-            <div class="filters-title">
-              🪄 用分類幫你搵伏
-            </div>
-            <div style="font-size: 11px; color: var(--text-soft);">
-              小貼士：先揀「類型」再縮窄到「地區」同「價錢」，會容易啲搵到啱你情況嘅個案。
-            </div>
-          </div>
-          <div class="filters-row">
-            <select class="select">
-              <option>店舖類型（餐廳、醫美、理髮…）</option>
-            </select>
-            <select class="select">
-              <option>地區（港島、九龍、新界、離島）</option>
-            </select>
-            <select class="select">
-              <option>伏感程度（中伏感覺有幾濃）</option>
-            </select>
-            <select class="select">
-              <option>價錢範圍（$0 - $200 / $200 - $500 / $500+）</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
-      <div class="grid">
-
-        <!-- LEFT: RANKING -->
-        <section>
-          <div class="section">
-            <div class="section-header">
-              <div>
-                <div class="section-title">
-                  🎯 12 月伏感排行榜
-                </div>
-                <div class="section-subtitle">
-                  以下內容可以完全由你原本文案填充，排版已預留位，只會幫你整齊顯示。
-                </div>
-              </div>
-              <div class="chips">
-                <span class="chip">
-                  <span class="chip-dot"></span>
-                  實體店
-                </span>
-                <span class="chip">
-                  💻 網店
-                </span>
-                <span class="chip">
-                  🎁 伏產品 / 伏服務
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 實體店 TOP 5 -->
-          <article class="card">
-            <div class="card-header-row">
-              <strong>🏪 12 月「實體伏店」Top 5</strong>
-              <span style="font-size: 11px; color: var(--text-soft);">內容照用你原本文字，只係幫你排靚少少。</span>
-            </div>
-            <ol class="rank-list">
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">1</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（請放你原本第 1 名實體店名）</div>
-                    <div class="rank-meta">例：位置／大約收費／一句形容中伏位。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-high">
-                    <span class="badge-risk-dot"></span> 伏感爆燈
-                  </div>
-                  <div>投訴數：xx</div>
-                </div>
-              </li>
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">2</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（實體店第 2 名）</div>
-                    <div class="rank-meta">可放你原本文字，唔需要改。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-high">
-                    <span class="badge-risk-dot"></span> 高伏感
-                  </div>
-                  <div>投訴數：xx</div>
-                </div>
-              </li>
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">3</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（實體店第 3 名）</div>
-                    <div class="rank-meta">照貼你原本 ranking 文案。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-mid">
-                    <span class="badge-risk-dot"></span> 中伏感
-                  </div>
-                  <div>投訴數：xx</div>
-                </div>
-              </li>
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">4</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（實體店第 4 名）</div>
-                    <div class="rank-meta">你原本內容逐字放入。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-mid">
-                    <span class="badge-risk-dot"></span> 有伏感
-                  </div>
-                  <div>投訴數：xx</div>
-                </div>
-              </li>
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">5</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（實體店第 5 名）</div>
-                    <div class="rank-meta">可以係「未至於爆伏，但值得小心位」。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-low">
-                    <span class="badge-risk-dot"></span> 輕伏感
-                  </div>
-                  <div>投訴數：xx</div>
-                </div>
-              </li>
-            </ol>
-          </article>
-
-          <!-- 網店 TOP 5 -->
-          <article class="card">
-            <div class="card-header-row">
-              <strong>💻 12 月「網店伏感」Top 5</strong>
-              <span style="font-size: 11px; color: var(--text-soft);">一樣可以用你原本文案，唔洗理排版問題。</span>
-            </div>
-            <ol class="rank-list">
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">1</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（網店第 1 名）</div>
-                    <div class="rank-meta">例如：預約 platform / 社交平台賣家 / 團購網站等。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-high">
-                    <span class="badge-risk-dot"></span> 爆伏感
-                  </div>
-                  <div>投訴數：xx</div>
-                </div>
-              </li>
-              <!-- 其餘 4 個位，照樣替換成你原有文字 -->
-            </ol>
-          </article>
-
-          <!-- 伏物 / 伏服務 TOP 5 -->
-          <article class="card">
-            <div class="card-header-row">
-              <strong>🎁 本月最「伏」產品 / 服務 Top 5</strong>
-              <span style="font-size: 11px; color: var(--text-soft);">可以放療程、套票、神奇小家電、會籍等。</span>
-            </div>
-            <ol class="rank-list">
-              <li class="rank-item">
-                <div class="rank-left">
-                  <span class="rank-number">1</span>
-                  <div class="rank-main">
-                    <div class="rank-name">（你原本寫嘅伏物 / 伏服務第 1 名）</div>
-                    <div class="rank-meta">例：買前以為好抵，實際使用後先發現中伏位。</div>
-                  </div>
-                </div>
-                <div class="rank-right">
-                  <div class="badge-risk badge-risk-high">
-                    <span class="badge-risk-dot"></span> 心靈創傷級
-                  </div>
-                  <div>分享數：xx</div>
-                </div>
-              </li>
-              <!-- 其餘 4 個位，照樣替換成你原有文字 -->
-            </ol>
-          </article>
-        </section>
-
-        <!-- RIGHT: INFO / HELP -->
-        <aside class="stack">
-
-          <section class="stack-card">
-            <h3>伏Kick 係咩？</h3>
-            <p>
-              伏Kick 想做嘅，只係一個輕鬆但有用嘅工具：幫人出門前「有準備」，而唔係出事後先「發洩」。所有文字你可以照貼你原本介紹。
-            </p>
-            <ul class="stack-list">
-              <li>你可以分享自己中伏經歷，畀其他人少走幾步冤枉路。</li>
-              <li>你可以出門前 search 一 search，對某啲店舖有心理準備。</li>
-              <li>你可以搵到適合自己情況嘅正式投訴渠道。</li>
-            </ul>
-          </section>
-
-          <section class="stack-card">
-            <h3>遇到伏店，可以點做？</h3>
-            <p>以下每一步都可以用你原本寫好嘅文字代替，只係用卡片方式幫你整齊展示。</p>
-            <div class="steps">
-              <div class="step-item">
-                <div class="step-icon">1</div>
-                <div class="step-body">
-                  <strong>先同商戶嘗試溝通</strong>
-                  <span>例如先了解收費細節、要求列明所有額外收費；保留收據、對話紀錄同相片。</span>
-                </div>
-              </div>
-              <div class="step-item">
-                <div class="step-icon">2</div>
-                <div class="step-body">
-                  <strong>向相關機構正式投訴</strong>
-                  <span>包括消委會、海關、行業監管機構、相關政府部門等，你原本教學文字可以逐字放入。</span>
-                </div>
-              </div>
-              <div class="step-item">
-                <div class="step-icon">3</div>
-                <div class="step-body">
-                  <strong>喺伏Kick 留低經歷</strong>
-                  <span>客觀描述遇到嘅情況，幫到下一個準備光顧同一間店嘅人。</span>
-                </div>
-              </div>
-              <div class="step-item">
-                <div class="step-icon">4</div>
-                <div class="step-body">
-                  <strong>考慮法律意見（如有需要）</strong>
-                  <span>如果涉及嚴重爭拗或金額龐大，可以考慮尋求法律協助，你原本文案照樣放入。</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="stack-card">
-            <h3>使用伏Kick 嘅小守則</h3>
-            <p>呢度可以擺你寫好嘅「使用守則」／「投稿指引」，唔需要改一隻字。</p>
-            <ul class="stack-list">
-              <li>盡量提供真實資料，例如日期、收費金額、地點、服務內容。</li>
-              <li>避免人身攻擊同歧視字眼，集中描述事件本身。</li>
-              <li>唔鼓勵人肉搜尋、網絡追擊或任何形式嘅騷擾行為。</li>
-            </ul>
-          </section>
-
-        </aside>
       </div>
 
-      <!-- CTA -->
-      <section class="cta">
-        <div class="cta-card">
-          <div class="cta-inner">
-            <div class="cta-main">
-              <div class="cta-title">你嘅一篇伏文，可以改變香港少少。</div>
-              <div class="cta-text">
-                每一次冷靜而認真的分享，都係向「資訊唔對稱」踢多腳。下次你喺街度諗緊「呢間會唔會好伏呢？」嗰陣，可能就係因為有另一個人曾經肯花五分鐘打字。
-              </div>
-              <div class="cta-actions">
-                <button class="btn-cta-main">
-                  🧊 含淚打好篇伏文
-                </button>
-                <span class="cta-ghost">
-                  👀 先八一八今個月有幾伏
-                </span>
-              </div>
-            </div>
-            <div>
-              <span class="cta-badge">
-                ✅ 你提供事實，我哋幫手排版同整理。
-              </span>
-            </div>
+      <!-- 卡片 2 -->
+      <div class="help-card">
+        <div class="help-icon pink">🛡️</div>
+        <div class="help-body">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+            <h3>消費者委員會（調解＋訴訟基金）</h3>
+            <span class="help-meta">熱線：2929 2222</span>
           </div>
-          <div class="cta-decor"></div>
+          <p>
+            消委會以調停人身份處理消費者投訴，協助投訴人及商戶溝通解決糾紛，但並非執法或裁決機構；個案一般須有清晰商戶及交易資料先可跟進。
+          </p>
+          <p>
+            若涉及重大公眾利益而調停失敗，可考慮申請「消費者訴訟基金」，獲得法律意見及訴訟費用支援，循法律途徑追討損失。
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <a href="https://www.consumer.org.hk/tc/complaints-and-services"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:190px;">
+                向消費者委員會投訴
+              </button>
+            </a>
+            <a href="https://www.consumer.org.hk/tc/complaints-and-services/consumer-legal-action-fund"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:210px;">
+                了解消費者訴訟基金
+              </button>
+            </a>
+          </div>
         </div>
-      </section>
+      </div>
 
-    </div>
-  </main>
+      <!-- 卡片 3 -->
+      <div class="help-card">
+        <div class="help-icon green">📦</div>
+        <div class="help-body">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+            <h3>香港海關：商品說明／貨品安全</h3>
+            <span class="help-meta">查詢：2815 7711　投訴：8100 3553</span>
+          </div>
+          <p>
+            懷疑貨品重量或尺寸不足、成色不符、虛假或誤導性商品說明，又或者玩具及一般消費品的安全有問題，都可以向香港海關舉報，由執法人員作刑事調查。
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <a href="https://www.customs.gov.hk/tc/contact-us/"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:220px;">
+                海關：聯絡及投訴方法
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
 
-  <footer>
-    <div class="footer-inner">
-      <span>© 2025 伏Kick · 一個由香港人自己整嘅「伏店資料庫」實驗。</span>
-      <div class="footer-links">
-        <a href="#">私隱政策</a>
-        <a href="#">使用條款</a>
-        <a href="#">聯絡我們</a>
+      <!-- 卡片 4 -->
+      <div class="help-card">
+        <div class="help-icon blue">🏛️</div>
+        <div class="help-body">
+          <h3>行業監管部門（電訊 / 旅遊 / 食肆 / 保險）</h3>
+          <p>
+            電訊及廣播服務合約條款或收費爭議，可向通訊事務管理局／通訊辦投訴；旅行社、導遊及領隊貨不對辦或被迫購物，可向旅遊業監管局申訴；食肆衞生及食物安全可向食環署舉報；個人保險索償及服務爭議，可向保險投訴局尋求免費仲裁或調解協助。
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
+            <a href="https://www.ofca.gov.hk/tc/contact_us/enquiry/index.html"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:210px;">
+                通訊事務管理局投訴電訊／廣播
+              </button>
+            </a>
+            <a href="https://www.tia.org.hk/tc/compliance/complaints.html"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:210px;">
+                旅遊業監管局：投訴旅行代理
+              </button>
+            </a>
+            <a href="https://www.fehd.gov.hk/tc_chi/index.html"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:190px;">
+                食環署：食物及衞生投訴
+              </button>
+            </a>
+            <a href="https://www.icb.org.hk/b5/"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:210px;">
+                保險投訴局（ICB）
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 5 -->
+      <div class="help-card">
+        <div class="help-icon purple">⚖️</div>
+        <div class="help-body">
+          <h3>打算上庭追討：小額錢債、區院、高院</h3>
+          <p>
+            小額錢債審裁處主要處理 75,000 港元或以下的金錢申索，程序較簡單且不准聘請律師；索償額較高的案件則需分別向區域法院或高等法院入稟，由律師協助處理。
+          </p>
+          <p>
+            若經濟能力有限，可以考慮向法律援助署或其他資助法律服務申請協助；入稟前亦可先參考 CLIC 等免費法律資訊，了解程序及成本風險。
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <a href="https://www.judiciary.hk/zh/court_services_facilities/sc.html"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:210px;">
+                小額錢債審裁處資料
+              </button>
+            </a>
+            <a href="https://www.clic.org.hk/zh/topics/legalAid"
+               target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+              <button class="btn btn-secondary" style="min-width:190px;">
+                免費或資助法律支援
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最底 CTA -->
+    <div class="final-cta">
+      <h2>你嘅報料可以改變香港</h2>
+      <p>每一個報料都係真實故事，每一個故事都保護下一個消費者。</p>
+      <div class="buttons">
+        <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
+           class="btn btn-primary"
+           target="_blank" rel="noopener noreferrer">
+          報料申訴
+        </a>
+        <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID"
+           class="btn btn-secondary"
+           target="_blank" rel="noopener noreferrer">
+          睇下有幾伏
+        </a>
       </div>
     </div>
-  </footer>
 
-</div>
+    <footer>
+      <p>🛡️ 伏Kick - 香港伏店資料庫</p>
+      <p>隱私優先 | 用戶至上 | 社區驅動</p>
+      <p>遵守香港《個人資料（私隱）條例》</p>
+    </footer>
+  </div>
+
+  <!-- 原有 JS 功能照保留 -->
+  <script>
+    const globalInput = document.getElementById('globalSearchInput');
+    const pageRoot   = document.getElementById('pageRoot');
+    const scrollHelpBtn = document.getElementById('scrollHelpBtn');
+    const helpSection = document.getElementById('helpSection');
+    const loginBtn = document.getElementById('loginBtn');
+    const contactBtn = document.getElementById('contactBtn');
+    const badTraderList = document.getElementById('badTraderList');
+    const namedShops = document.getElementById('namedShops');
+
+    function applyGlobalSearch(keyword) {
+      const k = keyword.trim().toLowerCase();
+      const blocks = pageRoot.querySelectorAll(
+        'h2, .feature, .ranking, .buttons, .subtitle, section'
+      );
+      blocks.forEach(el => {
+        const text = el.innerText.toLowerCase();
+        el.style.display = (!k || text.includes(k)) ? '' : 'none';
+      });
+    }
+
+    globalInput.addEventListener('input', (e) => {
+      applyGlobalSearch(e.target.value);
+    });
+
+    scrollHelpBtn.addEventListener('click', () => {
+      if (helpSection && helpSection.scrollIntoView) {
+        helpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    loginBtn.addEventListener('click', () => {
+      window.location.href = 'javascript:;';
+    });
+
+    contactBtn.addEventListener('click', () => {
+      window.location.href = 'mailto:fraudkick.hk@gmail.com';
+    });
+
+    badTraderList.addEventListener('click', () => {
+      window.location.href = 'https://www.consumer.org.hk/tc/complaints-and-services/sanctioned-traders';
+    });
+
+    namedShops.addEventListener('click', () => {
+      window.location.href = 'https://www.consumer.org.hk/tc/complaints-and-services/named-firms';
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
-
