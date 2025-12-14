@@ -129,7 +129,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
-            font-size: 1em;          /* 放大到同 subtitle 近似 */
+            font-size: 1em;
             text-align: left;
         }
 
@@ -143,8 +143,8 @@
             border: 1px solid #475569;
             background-color: #020617;
             color: #e2e8f0;
-            font-size: 1em;          /* 放大字體 */
-            height: 40px;            /* 稍為加高 */
+            font-size: 1em;
+            height: 40px;
         }
 
         .features {
@@ -251,8 +251,8 @@
                         搜尋頁面文字＋用下面分類幫你篩選（之後可連接 Google Sheet）
                     </div>
 
-                    <!-- 5 個下拉 -->
                     <div class="filter-row">
+                        <!-- 1 報料類別 -->
                         <div class="filter-group">
                             <label>報料類別 (伏店 / 廢物)</label>
                             <select id="filterReportType">
@@ -262,6 +262,7 @@
                             </select>
                         </div>
 
+                        <!-- 2 行業分類（一定係 select） -->
                         <div class="filter-group">
                             <label>行業分類</label>
                             <select id="filterIndustry">
@@ -281,6 +282,7 @@
                             </select>
                         </div>
 
+                        <!-- 3 地區 -->
                         <div class="filter-group">
                             <label>地區 (香港 18 區)</label>
                             <select id="filterDistrict">
@@ -306,6 +308,7 @@
                             </select>
                         </div>
 
+                        <!-- 4 中伏類別 -->
                         <div class="filter-group">
                             <label>中伏類別 (服務 / 產品)</label>
                             <select id="filterTrapType">
@@ -317,11 +320,15 @@
                             </select>
                         </div>
 
+                        <!-- 5 其他（尋找受害者 / 商家回應 etc） -->
                         <div class="filter-group">
-                            <label>尋找受害者？</label>
-                            <select id="filterFindVictims">
+                            <label>其他</label>
+                            <select id="filterOther">
                                 <option value="">全部</option>
-                                <option value="是">是（想搵其他苦主）</option>
+                                <option value="搵其他受害者">搵其他受害者</option>
+                                <option value="商家回應">商家回應</option>
+                                <option value="搵專業人士幫忙">搵專業人士幫忙</option>
+                                <option value="尋找其他良心商家">尋找其他良心商家</option>
                             </select>
                         </div>
                     </div>
@@ -391,7 +398,7 @@
                 <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID"
                    class="btn btn-secondary"
                    target="_blank">
-                   睇下有幾伏
+                   搜尋商戶
                 </a>
             </div>
         </div>
@@ -403,6 +410,7 @@
         </footer>
     </div>
 
+    <!-- 暫時只做 keyword filter，之後可配合下拉 -->
     <script>
         const globalInput = document.getElementById('globalSearchInput');
         const pageRoot   = document.getElementById('pageRoot');
