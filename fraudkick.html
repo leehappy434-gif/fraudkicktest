@@ -129,7 +129,7 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
-            font-size: 0.8em;
+            font-size: 1em;          /* 放大到同 subtitle 近似 */
             text-align: left;
         }
 
@@ -138,12 +138,13 @@
         }
 
         .filter-group select {
-            padding: 6px 8px;
+            padding: 6px 10px;
             border-radius: 999px;
             border: 1px solid #475569;
             background-color: #020617;
             color: #e2e8f0;
-            font-size: 0.85em;
+            font-size: 1em;          /* 放大字體 */
+            height: 40px;            /* 稍為加高 */
         }
 
         .features {
@@ -250,9 +251,8 @@
                         搜尋頁面文字＋用下面分類幫你篩選（之後可連接 Google Sheet）
                     </div>
 
-                    <!-- 5 個下拉：報料類別、行業分類、地區、中伏類別、尋找受害者 -->
+                    <!-- 5 個下拉 -->
                     <div class="filter-row">
-                        <!-- 1 報料類別 -->
                         <div class="filter-group">
                             <label>報料類別 (伏店 / 廢物)</label>
                             <select id="filterReportType">
@@ -262,15 +262,14 @@
                             </select>
                         </div>
 
-                        <!-- 2 行業分類（跟你表單 screenshot 大致分類） -->
                         <div class="filter-group">
                             <label>行業分類</label>
                             <select id="filterIndustry">
                                 <option value="">全部</option>
-                                <option value="餐飲">餐飲 (餐廳、茶檔、咖啡店等)</option>
+                                <option value="餐飲">餐飲 (餐廳、茶樓、咖啡店等)</option>
                                 <option value="零售">零售 (百貨、便利店、超市、小店等)</option>
                                 <option value="美容 / 健康">美容 / 健康 (美容院、gym、診所等)</option>
-                                <option value="教育 / 培訓">教育 / 培訓 (補習、課程、課後學校等)</option>
+                                <option value="教育 / 培訓">教育 / 培訓 (補習、課程、學校等)</option>
                                 <option value="房產 / 旅遊">房產 / 旅遊 (中介、酒店、民宿等)</option>
                                 <option value="交通 / 物流">交通 / 物流 (快遞、Taxi、搬運等)</option>
                                 <option value="維修 / 裝修">維修 / 裝修 (維修、裝修、安裝等)</option>
@@ -282,7 +281,6 @@
                             </select>
                         </div>
 
-                        <!-- 3 地區：香港 18 區 -->
                         <div class="filter-group">
                             <label>地區 (香港 18 區)</label>
                             <select id="filterDistrict">
@@ -308,7 +306,6 @@
                             </select>
                         </div>
 
-                        <!-- 4 中伏類別 -->
                         <div class="filter-group">
                             <label>中伏類別 (服務 / 產品)</label>
                             <select id="filterTrapType">
@@ -320,13 +317,11 @@
                             </select>
                         </div>
 
-                        <!-- 5 尋找受害者 -->
                         <div class="filter-group">
                             <label>尋找受害者？</label>
                             <select id="filterFindVictims">
                                 <option value="">全部</option>
                                 <option value="是">是（想搵其他苦主）</option>
-                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -355,5 +350,78 @@
             <div class="feature">
                 <h3>⚡真實個案</h3>
                 <p>消費紀錄,聊天記錄,報案紀錄,增強真實性。</p>
+            </div>
+            <div class="feature">
+                <h3>💚 社區力量</h3>
+                <p>圍爐,搵其他受害者,認清無良商家。</p>
+            </div>
+        </div>
 
+        <h2 style="color: #f43f5e; text-align: center; margin: 40px 0 20px 0;">12 月伏店排行榜 Top 3</h2>
+        <div class="ranking">
+            <div class="ranking-item">
+                <h3>🥇 ABC 美容中心（銅鑼灣）</h3>
+                <p>12 宗申訴 | 🔴 高風險(伏到爆)</p>
+                <p>常見問題：hard sell、隱藏收費</p>
+                <p>代表案例：「自稱唔hard sell,但sell 到你爆,要加呢樣加果樣」</p>
+            </div>
+            <div class="ranking-item">
+                <h3>🥈 XYZ 網店</h3>
+                <p>8 宗申訴 | 🟡 中風險(伏到嘔)</p>
+                <p>常見問題：延遲交付</p>
+                <p>代表案例：「網購等咗成個月先發貨」</p>
+            </div>
+            <div class="ranking-item">
+                <h3>🥉 123 餐廳（尖沙咀）</h3>
+                <p>7 宗申訴 | 🟡 中風險(伏到嘔)</p>
+                <p>常見問題：呃秤、份量勁少</p>
+                <p>代表案例：「普通大排檔一碟薯仔牛柳粒 $268，但得5粒干爭爭牛肉」</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 40px 20px; background-color: rgba(30, 41, 59, 0.8); border-radius: 5px; margin: 40px 0;">
+            <h2 style="color: #f43f5e;">你嘅報料可以改變香港</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">每一個報料都係真實故事，每一個故事都保護下一個消費者。</p>
+            <div class="buttons">
+                <a href="https://docs.google.com/forms/d/1iaRTo26gA1n08lJyXj_o-EK4Sv8BkY16h_lJv1e2NjU/viewform"
+                   class="btn btn-primary"
+                   target="_blank">
+                    報料申訴
+                </a>
+                <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID"
+                   class="btn btn-secondary"
+                   target="_blank">
+                   睇下有幾伏
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <p>🛡️ 伏Kick - 香港伏店資料庫</p>
+            <p>隱私優先 | 用戶至上 | 社區驅動</p>
+            <p>遵守香港《個人資料（私隱）條例》</p>
+        </footer>
+    </div>
+
+    <script>
+        const globalInput = document.getElementById('globalSearchInput');
+        const pageRoot   = document.getElementById('pageRoot');
+
+        function applyGlobalSearch(keyword) {
+            const k = keyword.trim().toLowerCase();
+            const blocks = pageRoot.querySelectorAll(
+                'h2, .feature, .ranking-item, .ranking, .buttons, .subtitle, .feature p, .ranking-item p'
+            );
+            blocks.forEach(el => {
+                const text = el.innerText.toLowerCase();
+                el.style.display = (!k || text.includes(k)) ? '' : 'none';
+            });
+        }
+
+        globalInput.addEventListener('input', (e) => {
+            applyGlobalSearch(e.target.value);
+        });
+    </script>
+</body>
+</html>
 
